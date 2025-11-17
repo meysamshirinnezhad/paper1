@@ -57,8 +57,8 @@ DOI: 10.2172/2420577
 
 CITED IN:
 - "Bottom-up NREL manufacturing-cost analyses put stack plus BOP equipment around $800-1,200/kW and total installed around $1,300-2,200/kW for utility-scale systems at current manufacturing scales, consistent with the $2,000/kW installed baseline adopted here."
-- "O&M costs are escalated annually in a manner consistent with the bottom-up PEM manufacturing cost trends reported by NREL."
-- "These cost parameters are aligned with updated 2024-2025 estimates that indicate higher system costs relative to earlier studies, driven in part by supply chain constraints and increased material prices."
+- "We adopt a total installed electrolyzer cost of $2,000/kW, consistent with 2024 DOE clean hydrogen cost estimates that draw on updated bottom-up manufacturing cost analyses."
+- "These cost parameters reflect 2024-2025 market conditions, which remain elevated relative to pre-2020 baselines due to materials prices and supply-chain constraints."
 
 ================================================================================
 
@@ -153,6 +153,8 @@ DOI: 10.2172/1991775
 CITED IN:
 - "Green hydrogen production via PEM electrolysis was modeled using current 2024-2025 technology parameters... where ηrec = 0.90 (rectifier efficiency) and Eez = 57.5 kWh/kg (PEM electrolyzer specific energy consumption based on DOE 2024 technical targets)."
 - "Our electrolyzer performance assumption of 57.5 kWh/kg H2 (system level) represents current commercial PEM technology as validated by multiple sources."
+- "We adopt a total installed electrolyzer cost of $2,000/kW, consistent with 2024 DOE clean hydrogen cost estimates that draw on updated bottom-up manufacturing cost analyses."
+- "These cost parameters reflect 2024-2025 market conditions, which remain elevated relative to pre-2020 baselines due to materials prices and supply-chain constraints."
 
 ================================================================================
 
@@ -163,7 +165,8 @@ Clean Hydrogen Partnership Technical Documentation, Brussels.
 
 CITED IN:
 - "Across studies, electricity cost and CF dominate LCOH: reviews and scenario syntheses find electricity contributes roughly 60%-75% of unsubsidized LCOH, while electrolyzer CAPEX, stack replacement, and O&M comprise the remainder."
-- "Installation costs at 12% of capital expenditure and stack replacement costs at 40% of initial investment reflect industry standards for PEM electrolysis systems."
+- "We adopt a total installed electrolyzer cost of $2,000/kW, consistent with 2024 DOE clean hydrogen cost estimates that draw on updated bottom-up manufacturing cost analyses."
+- "Fixed O&M is modeled as a constant fraction of installed CAPEX with standard cost escalation assumptions following IRENA and EC Hydrogen Observatory guidance."
 
 ================================================================================
 
@@ -314,8 +317,8 @@ ISBN: 978-92-9260-295-6
 CITED IN:
 - "The 57.5 kWh/kg assumption corresponds to approximately 57% system efficiency based on hydrogen's lower heating value and aligns with recent experimental studies reporting 56.3-58.4 kWh/kg for commercial PEM systems, falling within the established 55-69 kWh/kg range for current technology."
 - "Installed PEM costs must distinguish equipment-only from total installed: bottom-up NREL analyses and observatory manuals put equipment around $800-1,200/kW and total installed around $1,300-2,200/kW for utility-scale systems at current manufacturing scales, consistent with the $2,000/kW installed baseline adopted here."
-- "Stack degradation over ~60,000-80,000 operating hours necessitates mid-life stack replacement, often represented as a fraction of initial CAPEX and included alongside 2%-4%/year O&M in annualization."
-- "Installation costs at 12% of capital expenditure and stack replacement costs at 40% of initial investment reflect industry standards for PEM electrolysis systems."
+- "Following established PEM electrolysis cost models, installation costs are set at 12% of capital expenditure and stack replacement costs at 40% of initial investment."
+- "Stack replacement is necessitated by degradation over typical operational lifetimes of 60,000-80,000 hours, and fixed O&M is modeled as a constant fraction of installed CAPEX with standard cost escalation assumptions following IRENA and EC Hydrogen Observatory guidance."
 - "Combined with efficiency improvements targeting 45 kWh/kg by 2030, unsubsidized costs at high-CF sites could reach $2.50-3.00/kg, competitive with fossil-derived hydrogen even without subsidies."
 
 ================================================================================
@@ -504,7 +507,7 @@ Applied Energy, 355, 122233.
 DOI: 10.1016/j.apenergy.2023.122233
 
 CITED IN:
-- "Stack degradation over ~60,000-80,000 operating hours necessitates mid-life stack replacement, often represented as a fraction of initial CAPEX and included alongside 2%-4%/year O&M in annualization."
+- "Stack replacement is necessitated by degradation over typical operational lifetimes of 60,000-80,000 hours, and fixed O&M is modeled as a constant fraction of installed CAPEX with standard cost escalation assumptions following IRENA and EC Hydrogen Observatory guidance."
 
 ================================================================================
 

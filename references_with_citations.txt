@@ -45,7 +45,7 @@ Materials, 16(3), 959.
 DOI: 10.3390/ma16030959
 
 CITED IN:
-- "The 57.5 kWh/kg assumption corresponds to approximately 57% system efficiency based on hydrogen's lower heating value and aligns with recent experimental studies reporting 56.3-58.4 kWh/kg for commercial PEM systems."
+- "Provides experimental PEM electrolysis data with specific energy consumptions ranging from ~49 to ~63 kWh/kg, with minima near 58.4 kWh/kg under optimal conditions, in line with the 57.5 kWh/kg assumption."
 
 ================================================================================
 
@@ -195,7 +195,7 @@ International Journal of Hydrogen Energy, 45(51), 27457-27470.
 DOI: 10.1016/j.ijhydene.2020.07.007
 
 CITED IN:
-- "The 57.5 kWh/kg assumption corresponds to approximately 57% system efficiency based on hydrogen's lower heating value and aligns with recent experimental studies reporting 56.3-58.4 kWh/kg for commercial PEM systems."
+- "Recent system-level and experimental studies report specific energy consumptions between 56.3 and 58.4 kWh/kg for current PEM technology; Fragiacomo and Genovese report 56.3 kWh/kg for a 205 kg/day PEM-based hydrogen refueling station, supporting the 57.5 kWh/kg assumption used here."
 - "System-level specific energy consumption (SEC) for contemporary PEM electrolyzers clusters at 56-58 kWh/kg H2 at rated operation, reflecting stack plus balance-of-plant (compression, purification, cooling, power electronics), with part-load penalties elevating SEC toward 60-69 kWh/kg; these ranges are documented in DOE status baselines, experimental campaigns, and recent reviews."
 
 ================================================================================

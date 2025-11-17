@@ -25,14 +25,16 @@ International Journal of Hydrogen Energy, 44(29), 17669-17687.
 DOI: 10.1016/j.ijhydene.2019.05.077
 
 CITED IN:
-- "Following established wind resource assessment methodologies, wind measurements recorded at standard 10 m anemometer height were adjusted to turbine hub height using the power law" - demonstrates use of power-law/exponential-shear vertical extrapolation with site-specific exponents m(i).
-- "The capacity factor, a key economic metric quantifying the ratio of actual to theoretical maximum energy production, was determined following standard industry practice" - uses capacity factor C_f = E_avg / E_rat as key turbine-site selection metric.
-- "Following the approach in [AyodeleMunda2019], electrical energy from the wind energy conversion system (WECS) was calculated as E_WECS = E_avg × η_m × η_g" - adopts gearbox efficiency η_m = 0.85 and generator efficiency η_g = 0.95.
-- "This represents current 2024-2025 commercial PEM electrolyzer performance, compared to the 54 kWh/kg baseline reported in earlier assessments" - Ayodele & Munda used 54 kWh/kg as their PEM electrolyzer energy demand baseline.
-- "The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics" - employs levelized energy cost (LEC) combined with levelized cost of hydrogen (LCOH) framework.
-- "...with discount rate r = 10% and project lifetime T = 20 years, consistent with [AyodeleMunda2019]" - uses same discount rate and component lifetimes.
-- "Following established PEM electrolysis cost models, installation costs are set at 12% of capital expenditure and stack replacement costs at 40% of initial investment" - adopts electrolyzer cost fractions of 12% (installation) and 40% (stack replacement).
-- "Each parameter was varied independently while holding others constant, following the methodology in [AyodeleMunda2019]" - performs one-at-a-time sensitivity analysis on turbine parameters and exponential shear.
+- "Comparative reviews show that curve shape and segment treatment can drive ±3-5% CF differences, which is second-order relative to resource quality but material for LCOH at the margin" (Related Work) - discusses impact of power curve modeling choices on capacity factor accuracy.
+- "Following established wind resource assessment methodologies, wind measurements recorded at standard 10 m anemometer height were adjusted to turbine hub height using the power law" (Methodology) - general power-law vertical extrapolation methodology with site-specific shear exponents.
+- "Mechanical power output for each hour was calculated using manufacturer power curves and the parabolic approximation validated in comprehensive power curve modeling studies" (Methodology) - validates parabolic power curve approximation between cut-in and rated speeds.
+- "The capacity factor, a key economic metric quantifying the ratio of actual to theoretical maximum energy production, was determined following standard industry practice" (Methodology) - defines capacity factor as C_f = E_avg / E_rat for turbine-site performance assessment.
+- "Following the approach in [AyodeleMunda2019], electrical energy from the wind energy conversion system (WECS) was calculated as E_WECS = E_avg × η_m × η_g" (Methodology) - adopts WECS energy equation with gearbox efficiency η_m = 0.85 and generator efficiency η_g = 0.95.
+- "This represents current 2024-2025 commercial PEM electrolyzer performance, compared to the 54 kWh/kg baseline reported in earlier assessments" (Methodology) - Ayodele & Munda used 54 kWh/kg as their PEM electrolyzer specific energy consumption baseline.
+- "The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics" (Economic Analysis) - employs levelized energy cost (LEC) framework combined with levelized cost of hydrogen (LCOH).
+- "...with discount rate r = 10% and project lifetime T = 20 years, consistent with [AyodeleMunda2019]" (Economic Analysis) - uses 10% discount rate and 20-year component lifetimes for wind turbines and electrolyzers.
+- "Following established PEM electrolysis cost models, installation costs are set at 12% of capital expenditure and stack replacement costs at 40% of initial investment" (Economic Analysis) - adopts electrolyzer cost structure with 12% installation and 40% stack replacement fractions.
+- "Each parameter was varied independently while holding others constant, following the methodology in [AyodeleMunda2019]" (Sensitivity Analysis) - performs one-at-a-time sensitivity analysis varying turbine parameters and exponential shear while holding others constant.
 
 ================================================================================
 

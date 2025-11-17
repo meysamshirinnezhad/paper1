@@ -63,14 +63,14 @@ CITED IN:
 ================================================================================
 
 [Baral2024]
-Baral, S., Dehghanimohammadabadi, M., Berardi, U., 2024.
-Techno-economic assessment of green hydrogen production systems: A multi-criteria decision analysis approach.
-Applied Energy, 353, 122087.
-DOI: 10.1016/j.apenergy.2023.122087
+Baral, S., Šebo, J., 2024.
+Techno-economic assessment of green hydrogen production integrated with hybrid and organic Rankine cycle (ORC) systems.
+Heliyon, 10(4), e25742.
+DOI: 10.1016/j.heliyon.2024.e25742
 
 CITED IN:
-- "Recent techno-economic assessments have demonstrated that wind-powered electrolysis can achieve competitive hydrogen production costs, with levelized costs ranging from $3.01 to $15.6/kg depending on system configuration and local resource quality."
-- "These costs fall within the range reported by Frieden et al. for high-resource locations and match projections by Baral et al. for optimized wind-hydrogen systems."
+- "Recent techno-economic assessments have demonstrated that renewable-electricity-powered electrolysis can achieve competitive green hydrogen production costs, with levelized costs typically ranging from about $3.0 to $15.6/kg depending on system configuration, capacity factor, and local resource quality."
+- "These costs fall within the ranges reported by Frieden et al. for high-resource locations and closely match the optimized high-capacity-factor hybrid PV-wind scenarios reported by Baral and Šebo, where present-day green hydrogen costs span roughly $3-$16/kg depending on technology configuration and capacity factor."
 
 ================================================================================
 

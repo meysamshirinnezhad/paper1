@@ -75,14 +75,14 @@ CITED IN:
 ================================================================================
 
 [Beiter2021]
-Beiter, P., Musial, W., Smith, A., Kilcher, L., Damiani, R., Maness, M., Sirnivas, S., Stehly, T., Gevorgian, V., Mooney, M., Scott, G., 2021.
-Wind power costs driven by innovation and experience.
-Nature Energy, 6(5), 555-565.
-DOI: 10.1038/s41560-020-00772-9
+Beiter, P., Cooperman, A., Lantz, E., Stehly, T., Shields, M., Wiser, R., Telsnig, T., Kitzing, L., Berkhout, V., Kikuchi, Y., 2021.
+Wind power costs driven by innovation and experience with further reductions on the horizon.
+WIREs Energy and Environment, 10(5), e398.
+DOI: 10.1002/wene.398
 
 CITED IN:
 - "The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics."
-- "These values represent current market prices, updated from historical values to reflect technology maturation and market dynamics observed in recent cost assessments."
+- "These values represent current market prices, updated from historical values to reflect technology maturation and experience-driven cost reductions documented in recent cost assessments."
 
 ================================================================================
 

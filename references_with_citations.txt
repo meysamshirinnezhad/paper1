@@ -25,16 +25,14 @@ International Journal of Hydrogen Energy, 44(29), 17669-17687.
 DOI: 10.1016/j.ijhydene.2019.05.077
 
 CITED IN:
-- "Following established wind resource assessment methodologies, wind measurements recorded at standard 10 m anemometer height were adjusted to turbine hub height using the power law."
-- "The power law extrapolation method has been extensively validated for turbine performance prediction, with accuracy improvements of 4%-41% when using variable rather than fixed shear coefficients."
-- "...otherwise adopting the standard value of 0.143 for open terrain."
-- "The capacity factor, a key economic metric quantifying the ratio of actual to theoretical maximum energy production, was determined following standard industry practice."
-- "Following the approach in, electrical energy from the wind energy conversion system (WECS) was calculated as..."
-- "This represents current commercial PEM electrolyzer performance, updated from the 54 kWh/kg value used in earlier studies."
-- "The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics."
-- "...with discount rate r = 10% and project lifetime T = 20 years, consistent with."
-- "Installation costs at 12% of capital expenditure and stack replacement costs at 40% of initial investment reflect industry standards for PEM electrolysis systems."
-- "Each parameter was varied independently while holding others constant, following the methodology in."
+- "Following established wind resource assessment methodologies, wind measurements recorded at standard 10 m anemometer height were adjusted to turbine hub height using the power law" - demonstrates use of power-law/exponential-shear vertical extrapolation with site-specific exponents m(i).
+- "The capacity factor, a key economic metric quantifying the ratio of actual to theoretical maximum energy production, was determined following standard industry practice" - uses capacity factor C_f = E_avg / E_rat as key turbine-site selection metric.
+- "Following the approach in [AyodeleMunda2019], electrical energy from the wind energy conversion system (WECS) was calculated as E_WECS = E_avg × η_m × η_g" - adopts gearbox efficiency η_m = 0.85 and generator efficiency η_g = 0.95.
+- "This represents current 2024-2025 commercial PEM electrolyzer performance, compared to the 54 kWh/kg baseline reported in earlier assessments" - Ayodele & Munda used 54 kWh/kg as their PEM electrolyzer energy demand baseline.
+- "The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics" - employs levelized energy cost (LEC) combined with levelized cost of hydrogen (LCOH) framework.
+- "...with discount rate r = 10% and project lifetime T = 20 years, consistent with [AyodeleMunda2019]" - uses same discount rate and component lifetimes.
+- "Following established PEM electrolysis cost models, installation costs are set at 12% of capital expenditure and stack replacement costs at 40% of initial investment" - adopts electrolyzer cost fractions of 12% (installation) and 40% (stack replacement).
+- "Each parameter was varied independently while holding others constant, following the methodology in [AyodeleMunda2019]" - performs one-at-a-time sensitivity analysis on turbine parameters and exponential shear.
 
 ================================================================================
 

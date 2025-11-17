@@ -9,11 +9,11 @@ in which they are cited.
 [Andoni2025]
 Andoni, M., Tang, W., Robu, V., Flynn, D., 2025.
 Comparative techno-economic assessment of wind-powered green hydrogen pathways.
-IEEE ISGT Europe 2025 Conference Proceedings (submitted).
+In: Proc. IEEE ISGT Europe 2025 (Innovative Smart Grid Technologies Europe), Valletta, Malta.
 arXiv:2509.00136
 
 CITED IN:
-- "Recent studies have identified electrolyzer efficiency, capital costs, and operational parameters as secondary drivers."
+- "Recent techno-economic studies on wind-powered green hydrogen consistently identify electricity price as the primary LCOH driver, with electrolyzer capital cost as another major contributor, while parameters such as efficiency, stack lifetime, and discount rate exert smaller but still significant effects."
 
 ================================================================================
 

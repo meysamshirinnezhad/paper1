@@ -56,8 +56,9 @@ NREL Technical Report NREL/TP-5900-89564, National Renewable Energy Laboratory, 
 DOI: 10.2172/2420577
 
 CITED IN:
-- "...while O&M costs follow annual escalation patterns validated in bottom-up manufacturing cost analyses."
-- "These cost parameters reflect 2024-2025 market conditions and represent increases from earlier estimates due to supply chain constraints and increased material costs."
+- "Bottom-up NREL manufacturing-cost analyses put stack plus BOP equipment around $800-1,200/kW and total installed around $1,300-2,200/kW for utility-scale systems at current manufacturing scales, consistent with the $2,000/kW installed baseline adopted here."
+- "O&M costs are escalated annually in a manner consistent with the bottom-up PEM manufacturing cost trends reported by NREL."
+- "These cost parameters are aligned with updated 2024-2025 estimates that indicate higher system costs relative to earlier studies, driven in part by supply chain constraints and increased material prices."
 
 ================================================================================
 

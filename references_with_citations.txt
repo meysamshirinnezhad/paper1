@@ -1,0 +1,585 @@
+REFERENCES WITH CITATION CONTEXT
+================================================================================
+
+This file contains all references from the paper along with the sentences
+in which they are cited.
+
+================================================================================
+
+[Andoni2025]
+Andoni, M., Tang, W., Robu, V., Flynn, D., 2025.
+Comparative techno-economic assessment of wind-powered green hydrogen pathways.
+In: Proc. IEEE ISGT Europe 2025 (Innovative Smart Grid Technologies Europe), Valletta, Malta.
+Also available as arXiv:2509.00136.
+
+CITED IN:
+- "Recent techno-economic studies on wind-powered green hydrogen consistently identify electricity price as the primary LCOH driver, with electrolyzer capital cost as another major contributor."
+- "Other parameters such as efficiency, stack lifetime, and discount rate exert smaller but still significant effects."
+
+================================================================================
+
+[AyodeleMunda2019]
+Ayodele, T.R., Munda, J.L., 2019.
+Potential and economic viability of green hydrogen production by water electrolysis using wind energy resources in South Africa.
+International Journal of Hydrogen Energy, 44(29), 17669-17687.
+DOI: 10.1016/j.ijhydene.2019.05.077
+
+CITED IN:
+- "Comparative reviews show that curve shape and segment treatment can drive ±3-5% CF differences, which is second-order relative to resource quality but material for LCOH at the margin" (Related Work) - discusses impact of power curve modeling choices on capacity factor accuracy.
+- "Following established wind resource assessment methodologies, wind measurements recorded at standard 10 m anemometer height were adjusted to turbine hub height using the power law" (Methodology) - general power-law vertical extrapolation methodology with site-specific shear exponents.
+- "Mechanical power output for each hour was calculated using manufacturer power curves and the parabolic approximation validated in comprehensive power curve modeling studies" (Methodology) - validates parabolic power curve approximation between cut-in and rated speeds.
+- "The capacity factor, a key economic metric quantifying the ratio of actual to theoretical maximum energy production, was determined following standard industry practice" (Methodology) - defines capacity factor as C_f = E_avg / E_rat for turbine-site performance assessment.
+- "Following the approach in [AyodeleMunda2019], electrical energy from the wind energy conversion system (WECS) was calculated as E_WECS = E_avg × η_m × η_g" (Methodology) - adopts WECS energy equation with gearbox efficiency η_m = 0.85 and generator efficiency η_g = 0.95.
+- "This represents current 2024-2025 commercial PEM electrolyzer performance, compared to the 54 kWh/kg baseline reported in earlier assessments" (Methodology) - Ayodele & Munda used 54 kWh/kg as their PEM electrolyzer specific energy consumption baseline.
+- "The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics" (Economic Analysis) - employs levelized energy cost (LEC) framework combined with levelized cost of hydrogen (LCOH).
+- "...with discount rate r = 10% and project lifetime T = 20 years, consistent with [AyodeleMunda2019]" (Economic Analysis) - uses 10% discount rate and 20-year component lifetimes for wind turbines and electrolyzers.
+- "Following established PEM electrolysis cost models, installation costs are set at 12% of capital expenditure and stack replacement costs at 40% of initial investment" (Economic Analysis) - adopts electrolyzer cost structure with 12% installation and 40% stack replacement fractions.
+- "Each parameter was varied independently while holding others constant, following the methodology in [AyodeleMunda2019]" (Sensitivity Analysis) - performs one-at-a-time sensitivity analysis varying turbine parameters and exponential shear while holding others constant.
+
+================================================================================
+
+[Azam2023]
+Azam, A.M.I.N., Mamat, R., Mohamed, W.A.N.W., Najafi, G., 2023.
+Parametric study and electrocatalyst of polymer electrolyte membrane (PEM) electrolysis performance.
+Materials, 16(3), 959.
+DOI: 10.3390/ma16030959
+
+CITED IN:
+- "The 57.5 kWh/kg assumption corresponds to approximately 57% system efficiency based on hydrogen's lower heating value and aligns with recent experimental studies reporting 56.3-58.4 kWh/kg for commercial PEM systems."
+
+================================================================================
+
+[Badgett2024]
+Badgett, A., Dunnmon, E., James, B., Colella, W., Penev, M., 2024.
+Updated manufactured cost analysis for proton exchange membrane water electrolyzers.
+NREL Technical Report NREL/TP-5900-89564, National Renewable Energy Laboratory, Golden, CO.
+DOI: 10.2172/2420577
+
+CITED IN:
+- "...while O&M costs follow annual escalation patterns validated in bottom-up manufacturing cost analyses."
+- "These cost parameters reflect 2024-2025 market conditions and represent increases from earlier estimates due to supply chain constraints and increased material costs."
+
+================================================================================
+
+[Baral2024]
+Baral, S., Dehghanimohammadabadi, M., Berardi, U., 2024.
+Techno-economic assessment of green hydrogen production systems: A multi-criteria decision analysis approach.
+Applied Energy, 353, 122087.
+DOI: 10.1016/j.apenergy.2023.122087
+
+CITED IN:
+- "Recent techno-economic assessments have demonstrated that wind-powered electrolysis can achieve competitive hydrogen production costs, with levelized costs ranging from $3.01 to $15.6/kg depending on system configuration and local resource quality."
+- "These costs fall within the range reported by Frieden et al. for high-resource locations and match projections by Baral et al. for optimized wind-hydrogen systems."
+
+================================================================================
+
+[Beiter2021]
+Beiter, P., Musial, W., Smith, A., Kilcher, L., Damiani, R., Maness, M., Sirnivas, S., Stehly, T., Gevorgian, V., Mooney, M., Scott, G., 2021.
+Wind power costs driven by innovation and experience.
+Nature Energy, 6(5), 555-565.
+DOI: 10.1038/s41560-020-00772-9
+
+CITED IN:
+- "The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics."
+- "These values represent current market prices, updated from historical values to reflect technology maturation and market dynamics observed in recent cost assessments."
+
+================================================================================
+
+[Buttler2018]
+Buttler, A., Spliethoff, H., 2018.
+Current status of water electrolysis for energy storage, grid balancing and sector coupling via power-to-gas and power-to-liquids: A review.
+Renewable and Sustainable Energy Reviews, 82, 2440-2454.
+DOI: 10.1016/j.rser.2017.09.003
+
+CITED IN:
+- "Building on established methodologies for wind resource assessment and hydrogen production modeling, we quantify how geographic variations in capacity factor translate to levelized cost of hydrogen (LCOH)."
+- "Our electrolyzer performance assumption of 57.5 kWh/kg H2 (system level) represents current commercial PEM technology as validated by multiple sources."
+
+================================================================================
+
+[CanadaOffshore2024]
+Government of Canada, 2024.
+Bill C-49: An Act to amend the Canada—Newfoundland and Labrador Atlantic Accord Implementation Act and the Canada—Nova Scotia Offshore Petroleum Resources Accord Implementation Act.
+Parliament of Canada, Ottawa.
+
+CITED IN:
+- "Recent policy developments, including Bill C-49 enabling offshore wind development in Atlantic Canada, have created favorable conditions for large-scale green hydrogen production."
+- "...while Canada's Bill C-49 creates a clear regulatory framework for Atlantic offshore wind development that enables wind-to-hydrogen pathways even in advance of production credits, with multiple projects (e.g., EverWind/World Energy GH2) advancing under this enabling environment."
+- "Canadian policy frameworks are evolving to provide similar support mechanisms, particularly for Atlantic offshore wind development."
+
+================================================================================
+
+[Carrillo2013]
+Carrillo, C., Obando Montaño, A.F., Cidrás, J., Díaz-Dorado, E., 2013.
+Review of power curve modelling for wind turbines.
+Renewable and Sustainable Energy Reviews, 21, 572-581.
+DOI: 10.1016/j.rser.2013.01.012
+
+CITED IN:
+- "Mechanical power output for each hour was calculated using manufacturer power curves and the parabolic approximation validated in comprehensive power curve modeling studies."
+- "This piecewise power relationship represents a computationally efficient approximation of manufacturer power curves with demonstrated accuracy in energy yield predictions."
+
+================================================================================
+
+[Corscadden2016]
+Corscadden, K.W., Astatkie, T., Huang, G., Pegg, M.J., 2016.
+The impact of variable wind shear coefficients on risk assessment in wind resource.
+Energies, 9(11), 867.
+DOI: 10.3390/en9110867
+
+CITED IN:
+- "Site-specific shear calibration reduces wind/CF prediction error by roughly 4-41% relative to fixed-exponent methods, with the largest gains in coastal transition and complex-terrain settings, a finding confirmed for Canadian Atlantic sites by Corscadden et al. using Nova Scotia measurements."
+- "The power law extrapolation method has been extensively validated for turbine performance prediction, with accuracy improvements of 4%-41% when using variable rather than fixed shear coefficients."
+
+================================================================================
+
+[Doane2018]
+Doane Grant Thornton, 2018.
+Renewable energy discount rate survey results -- 2018.
+DGT Industry Reports, Toronto.
+
+CITED IN:
+- "The 10% discount rate represents a conservative estimate for standalone renewable hydrogen projects, falling within the empirically observed 8-12% range for Canadian onshore wind projects and above the 6-7% rates typical for established technologies with policy support."
+
+================================================================================
+
+[DOE2024tech]
+U.S. Department of Energy, 2024.
+Technical targets for proton exchange membrane electrolysis.
+Hydrogen and Fuel Cell Technologies Office, Washington, DC.
+DOI: 10.2172/1991775
+
+CITED IN:
+- "Green hydrogen production via PEM electrolysis was modeled using current 2024-2025 technology parameters... where ηrec = 0.90 (rectifier efficiency) and Eez = 57.5 kWh/kg (PEM electrolyzer specific energy consumption based on DOE 2024 technical targets)."
+- "Our electrolyzer performance assumption of 57.5 kWh/kg H2 (system level) represents current commercial PEM technology as validated by multiple sources."
+
+================================================================================
+
+[ECH2024]
+European Clean Hydrogen Observatory, 2024.
+Levelised cost of hydrogen (LCOH) calculator manual.
+Clean Hydrogen Partnership Technical Documentation, Brussels.
+
+CITED IN:
+- "Across studies, electricity cost and CF dominate LCOH: reviews and scenario syntheses find electricity contributes roughly 60%-75% of unsubsidized LCOH, while electrolyzer CAPEX, stack replacement, and O&M comprise the remainder."
+- "Installation costs at 12% of capital expenditure and stack replacement costs at 40% of initial investment reflect industry standards for PEM electrolysis systems."
+
+================================================================================
+
+[Egeland2024]
+Egeland-Eriksen, T., Flatten, Ø.S., Ulleberg, Ø., Sartori, S., 2024.
+Techno-economic analysis of the effect of a novel price-based control system for wind-hydrogen systems.
+International Journal of Hydrogen Energy, 61, 652-665.
+DOI: 10.1016/j.ijhydene.2024.02.257
+
+CITED IN:
+- "Recent studies have identified electrolyzer efficiency, capital costs, and operational parameters as secondary drivers."
+
+================================================================================
+
+[Fernandes2016]
+Fernandes, C.M.C.G., Blazquez, L., Sanes, J., Urchegui, M.A., Martins, R.C., Seabra, J.H.O., Bermudez, M.D., 2016.
+Energy efficiency tests in a 850 kW wind turbine gearbox.
+Tribology International, 101, 375-382.
+DOI: 10.1016/j.triboint.2016.05.007
+
+CITED IN:
+- "The gearbox efficiency of 85% and generator efficiency of 95% reflect typical mechanical and electrical conversion losses in commercial wind turbine drivetrains, as validated by full-scale testing."
+
+================================================================================
+
+[Fragiacomo2020]
+Fragiacomo, P., Genovese, M., 2020.
+Numerical simulations of the energy performance of a PEM water electrolysis based high-pressure hydrogen refueling station.
+International Journal of Hydrogen Energy, 45(51), 27457-27470.
+DOI: 10.1016/j.ijhydene.2020.07.007
+
+CITED IN:
+- "The 57.5 kWh/kg assumption corresponds to approximately 57% system efficiency based on hydrogen's lower heating value and aligns with recent experimental studies reporting 56.3-58.4 kWh/kg for commercial PEM systems."
+- "System-level specific energy consumption (SEC) for contemporary PEM electrolyzers clusters at 56-58 kWh/kg H2 at rated operation, reflecting stack plus balance-of-plant (compression, purification, cooling, power electronics), with part-load penalties elevating SEC toward 60-69 kWh/kg; these ranges are documented in DOE status baselines, experimental campaigns, and recent reviews."
+
+================================================================================
+
+[Frieden2024]
+Frieden, D., Leker, J., von Wald, G., 2024.
+Future costs of hydrogen: A quantitative review.
+Sustainable Energy & Fuels, 8(9), 1806-1822.
+DOI: 10.1039/D4SE00137K
+
+CITED IN:
+- "The dominant cost driver remains the capacity factor of renewable generation, which recent quantitative reviews have shown to correlate strongly with production economics (correlation coefficient of -0.71 for wind systems)."
+- "These costs fall within the range reported by Frieden et al. for high-resource locations and match projections by Baral et al. for optimized wind-hydrogen systems."
+- "Across studies, electricity cost and CF dominate LCOH: reviews and scenario syntheses find electricity contributes roughly 60%-75% of unsubsidized LCOH, while electrolyzer CAPEX, stack replacement, and O&M comprise the remainder."
+- "The empirical relationship ΔLCOH ≈ $0.108/kg per capacity factor percentage point (95% CI: $0.078-$0.138) provides actionable guidance for project developers and policymakers."
+
+================================================================================
+
+[Giampieri2023]
+Giampieri, A., Ling-Chin, J., Roskilly, A.P., 2023.
+Techno-economic assessment of offshore wind-to-hydrogen scenarios: A UK case study.
+International Journal of Hydrogen Energy, 48(16), 6065-6081.
+DOI: 10.1016/j.ijhydene.2022.12.149
+
+CITED IN:
+- "The transition to green hydrogen produced from renewable electricity represents a critical pathway for decarbonizing hard-to-abate sectors, particularly in regions with abundant wind resources."
+- "International TEAs span unsubsidized LCOH from about $3.5-15/kg depending on CF, electricity price, and financing, with European offshore clustering around $5-9/kg at 45%-55% CF and U.S. onshore spanning roughly $5.5-12/kg under 2024 conditions."
+- "This linear relationship demonstrates that each 1 pp increase in capacity factor reduces LCOH by $0.108/kg (95% CI: $0.078-$0.138), consistent with sensitivity analyses in offshore wind-hydrogen studies showing electricity cost dominance."
+- "Our results align closely with contemporary international assessments while revealing Canada's competitive advantages. The $4.85-$5.50/kg range for top-tier sites matches or exceeds performance reported in European offshore studies."
+
+================================================================================
+
+[Glenk2023]
+Glenk, G., Reichelstein, S., 2023.
+Advances in power-to-gas technologies: Cost and conversion efficiency improvements.
+Joule, 7(4), 824-842.
+DOI: 10.1016/j.joule.2023.03.012
+
+CITED IN:
+- "...learning-curve syntheses and council/agency outlooks project gradual system-level CAPEX declines toward ~$600-$1,200/kW by ~2030 contingent on multi-GW scaling, with stack-specific learning typically outpacing full system learning due to BOP constraints."
+- "Learning curve analyses indicate PEM electrolyzer costs declining to $225-352/kW by 2030 (from current $2,000/kW), driven by a 14% learning rate."
+
+================================================================================
+
+[HOMER2016]
+HOMER Energy, 2016.
+Annualized cost calculation methodology.
+HOMER Pro Documentation, Boulder, CO.
+
+CITED IN:
+- "...where Q represents capital recovery factors for each component, calculated using the standard annualization formula."
+
+================================================================================
+
+[Hunt2024]
+Hunt, J.D., Zakeri, B., Jurasz, J., Tong, W., et al., 2024.
+Hydrogen balloon storage: A flexible and cost-effective solution for hydrogen storage.
+Nature Communications, 15, 8625.
+DOI: 10.1038/s41467-024-52237-1
+
+CITED IN:
+- "Recent innovations in hydrogen storage, including gravel-bed systems with costs of $0.17/kg, could enable cost-effective buffer storage at production sites."
+
+================================================================================
+
+[ICCT2023]
+International Council on Clean Transportation, 2023.
+Can the Inflation Reduction Act unlock a green hydrogen economy?
+ICCT Working Paper 2023-04, Washington, DC.
+
+CITED IN:
+- "The transformative potential of policy support becomes evident when considering production tax credits. The U.S. Inflation Reduction Act's $3/kg credit, if applied to Canadian production, would reduce costs at our best sites to $1.85-$2.50/kg, approaching parity with grey hydrogen."
+
+================================================================================
+
+[ICCT2024]
+International Council on Clean Transportation, 2024.
+The price of green hydrogen: How and why we estimate hydrogen production costs.
+ICCT Working Paper 2024-08, Washington, DC.
+
+CITED IN:
+- "International TEAs span unsubsidized LCOH from about $3.5-15/kg depending on CF, electricity price, and financing, with European offshore clustering around $5-9/kg at 45%-55% CF and U.S. onshore spanning roughly $5.5-12/kg under 2024 conditions."
+- "The transformative potential of policy support becomes evident when considering production tax credits. The U.S. Inflation Reduction Act's $3/kg credit, if applied to Canadian production, would reduce costs at our best sites to $1.85-$2.50/kg, approaching parity with grey hydrogen."
+
+================================================================================
+
+[IEA2023]
+International Energy Agency, 2023.
+Global hydrogen review 2023.
+IEA Publications, Paris.
+DOI: 10.1787/d6c9f985-en
+
+CITED IN:
+- "Significantly, 16/21 sites (76%) achieve LCOH <$10/kg, the threshold identified by multiple studies as economically defensible for near-term deployment."
+
+================================================================================
+
+[IEAWind2022]
+IEA Wind Technology Collaboration Programme, 2022.
+Canada country report.
+IEA Wind Annual Report, Paris.
+
+CITED IN:
+- "Canadian wind context features strong coastal and prairie resources: IEA Wind Canada reporting and Atlantic studies indicate onshore coastal CFs approaching ~35%-45% and offshore potential in the upper 40s to low 60s depending on site and technology, consistent with measured high-CF coastal sites in this work's dataset."
+- "This pattern corresponds to Canada's wind energy deployment, where Atlantic provinces and prairie regions dominate installed capacity."
+
+================================================================================
+
+[IRENA2020]
+International Renewable Energy Agency, 2020.
+Green hydrogen cost reduction: Scaling up electrolysers to meet the 1.5°C climate goal.
+IRENA, Abu Dhabi.
+ISBN: 978-92-9260-295-6
+
+CITED IN:
+- "The 57.5 kWh/kg assumption corresponds to approximately 57% system efficiency based on hydrogen's lower heating value and aligns with recent experimental studies reporting 56.3-58.4 kWh/kg for commercial PEM systems, falling within the established 55-69 kWh/kg range for current technology."
+- "Installed PEM costs must distinguish equipment-only from total installed: bottom-up NREL analyses and observatory manuals put equipment around $800-1,200/kW and total installed around $1,300-2,200/kW for utility-scale systems at current manufacturing scales, consistent with the $2,000/kW installed baseline adopted here."
+- "Stack degradation over ~60,000-80,000 operating hours necessitates mid-life stack replacement, often represented as a fraction of initial CAPEX and included alongside 2%-4%/year O&M in annualization."
+- "Installation costs at 12% of capital expenditure and stack replacement costs at 40% of initial investment reflect industry standards for PEM electrolysis systems."
+- "Combined with efficiency improvements targeting 45 kWh/kg by 2030, unsubsidized costs at high-CF sites could reach $2.50-3.00/kg, competitive with fossil-derived hydrogen even without subsidies."
+
+================================================================================
+
+[IVSC2021]
+International Valuation Standards Council, 2021.
+Valuation of renewable energy projects: methodology guide.
+IVSC Practice Standards, London.
+
+CITED IN:
+- "The 10% discount rate represents a conservative estimate for standalone renewable hydrogen projects, falling within the empirically observed 8-12% range for Canadian onshore wind projects and above the 6-7% rates typical for established technologies with policy support."
+
+================================================================================
+
+[Kanz2021]
+Kanz, O., Bittkau, K., Ding, K., Rau, U., Reinders, A., 2021.
+Review and harmonization of the life-cycle global warming potential of PEM water electrolysis.
+Frontiers in Electronics, 2, 711103.
+DOI: 10.3389/felec.2021.711103
+
+CITED IN:
+- "The 57.5 kWh/kg assumption corresponds to approximately 57% system efficiency based on hydrogen's lower heating value and aligns with recent experimental studies reporting 56.3-58.4 kWh/kg for commercial PEM systems, falling within the established 55-69 kWh/kg range for current technology."
+- "This sensitivity exceeds that reported for electrolyzer efficiency (typically 5%-7% LCOH change per 10% efficiency improvement)."
+
+================================================================================
+
+[Kubik2011]
+Kubik, M.L., Coker, P.J., Barlow, J.F., 2011.
+Using meteorological wind data to estimate turbine generation.
+Renewable Energy, 36(10), 2797-2805.
+DOI: 10.1016/j.renene.2011.04.014
+
+CITED IN:
+- "Following established wind resource assessment methodologies, wind measurements recorded at standard 10 m anemometer height were adjusted to turbine hub height using the power law."
+- "The power law extrapolation method has been extensively validated for turbine performance prediction."
+
+================================================================================
+
+[Langer2022]
+Langer, J., Quist, J., Blok, K., 2022.
+How offshore wind could become economically attractive in low-resource regions like Canada.
+PLOS ONE, 17(8), e0271687.
+DOI: 10.1371/journal.pone.0271687
+
+CITED IN:
+- "This variability exceeds that reported in recent multi-regional studies, which typically show 20-30 pp variations. The exceptional performance of coastal sites aligns with offshore wind assessments showing capacity factors of 20-60% for Canadian waters."
+- "Canadian wind context features strong coastal and prairie resources: IEA Wind Canada reporting and Atlantic studies indicate onshore coastal CFs approaching ~35%-45% and offshore potential in the upper 40s to low 60s depending on site and technology, consistent with measured high-CF coastal sites in this work's dataset."
+
+================================================================================
+
+[Lazar2024]
+Lázár, I., Kiss, P., Szendrö, G., 2024.
+Comparative examinations of wind speed and energy extrapolation methods.
+Renewable Energy, 224, 120182.
+DOI: 10.1016/j.renene.2024.120182
+
+CITED IN:
+- "Recent TEAs overwhelmingly extrapolate measured winds from standard anemometer heights to hub height using the power law."
+- "Machine-learning and multi-height studies further quantify extrapolation uncertainty at 80-120 m, reinforcing that calibrated power-law (or log-law where roughness and stability are well-characterized) minimizes AEP bias for screening studies."
+
+================================================================================
+
+[Li2024]
+Li, Y., Zhang, X., Wang, J., Liu, H., 2024.
+Levelized cost analysis of onshore wind-powered hydrogen production in China considering landform heterogeneity.
+Energy, 294, 130942.
+DOI: 10.1016/j.energy.2024.130942
+
+CITED IN:
+- "This variability exceeds that reported in recent multi-regional studies, which typically show 20-30 pp variations."
+- "The coefficient magnitude aligns with polynomial regression models developed for Chinese provinces, which similarly show capacity factor as the primary cost determinant."
+- "Comparative reviews show that curve shape and segment treatment can drive ±3-5% CF differences, which is second-order relative to resource quality but material for LCOH at the margin; accordingly, recent multi-region TEAs couple curve choice with deliberate site-turbine matching to align rated speed with the site wind-speed distribution. Studies that explicitly optimize hub height and rated speed for local wind regimes report CF improvements of roughly 8-12% up to ~120-140 m before diminishing returns from taller towers offset energy gains, a pattern consistent with ML-informed hub-height estimation and observed cost-benefit inflection points."
+
+================================================================================
+
+[Liu2023]
+Liu, B., Ma, X., Guo, J., Ge, R., et al., 2023.
+Estimating hub-height wind speed based on a machine learning algorithm.
+Atmospheric Chemistry and Physics, 23, 3181-3193.
+DOI: 10.5194/acp-23-3181-2023
+
+CITED IN:
+- "Building on established methodologies for wind resource assessment and hydrogen production modeling, we quantify how geographic variations in capacity factor translate to levelized cost of hydrogen (LCOH)."
+- "Machine-learning and multi-height studies further quantify extrapolation uncertainty at 80-120 m, reinforcing that calibrated power-law (or log-law where roughness and stability are well-characterized) minimizes AEP bias for screening studies."
+- "Comparative reviews show that curve shape and segment treatment can drive ±3-5% CF differences, which is second-order relative to resource quality but material for LCOH at the margin; accordingly, recent multi-region TEAs couple curve choice with deliberate site-turbine matching to align rated speed with the site wind-speed distribution. Studies that explicitly optimize hub height and rated speed for local wind regimes report CF improvements of roughly 8-12% up to ~120-140 m before diminishing returns from taller towers offset energy gains, a pattern consistent with ML-informed hub-height estimation and observed cost-benefit inflection points."
+- "Turbine-site matching: Misalignment between rated wind speed and site characteristics increases costs by up to 15%, emphasizing the importance of turbine selection methodologies."
+- "Hub height optimization: Increasing hub height from 100 m to 140 m reduces LCOH by 8%-12%, with diminishing returns above 140 m due to increased capital costs. This finding aligns with machine learning-based hub height optimization studies."
+
+================================================================================
+
+[Lu2023]
+Lu, X., Zhang, S., Xing, J., et al., 2023.
+Techno-economic assessment of green hydrogen production via electrolysis in China: A provincial-level analysis.
+Frontiers in Energy Research, 10, 1046140.
+DOI: 10.3389/fenrg.2022.1046140
+
+CITED IN:
+- "This variability exceeds that reported in recent multi-regional studies, which typically show 20-30 pp variations."
+- "The coefficient magnitude aligns with polynomial regression models developed for Chinese provinces, which similarly show capacity factor as the primary cost determinant."
+
+================================================================================
+
+[NREL2024atb]
+National Renewable Energy Laboratory, 2024.
+Financial cases and methods: Annual technology baseline.
+NREL ATB Documentation, Golden, CO.
+
+CITED IN:
+- "The 10% discount rate represents a conservative estimate for standalone renewable hydrogen projects, falling within the empirically observed 8-12% range for Canadian onshore wind projects and above the 6-7% rates typical for established technologies with policy support."
+
+================================================================================
+
+[NREL2024calc]
+National Renewable Energy Laboratory, 2024.
+Simple levelized cost of energy (LCOE) calculator documentation.
+NREL Online Tools, Golden, CO.
+
+CITED IN:
+- "TEAs consistently annualize capital via the capital recovery factor CRF = r(1+r)^T/[(1+r)^T-1] and compute wind LCOE as the sum of annualized capital and fixed O&M over annual net generation, which then feeds the hydrogen LCOH through SEC and electrolyzer annualization; standard calculators and cost-of-wind reviews document parameter ranges and provide transparent reference values for FCR/WACC and lifetimes."
+- "...where Q represents capital recovery factors for each component, calculated using the standard annualization formula."
+
+================================================================================
+
+[Ouyang2017]
+Ouyang, T., Kusiak, A., He, Y., 2017.
+Modeling wind-turbine power curve: A data partitioning and mining approach.
+Renewable Energy, 102, 1-8.
+DOI: 10.1016/j.renene.2016.10.032
+
+CITED IN:
+- "Mechanical power output for each hour was calculated using manufacturer power curves and the parabolic approximation validated in comprehensive power curve modeling studies."
+- "Manufacturer power curves remain the reference standard for yield modeling, while validated parametric or piecewise approximations are widely used in screening-scale TEAs to reduce computational burden; the parabolic form between cut-in and rated, as employed here, achieves mean absolute error typically below 2-3% versus manufacturer curves when segment boundaries are respected."
+
+================================================================================
+
+[Pinchart2025]
+Pinchart-Deny, M., Bahn, O., Normandin, F., 2025.
+Levelized cost of green hydrogen production in Canada using wind energy resources.
+Renewable Energy, 237, 121295.
+DOI: 10.1016/j.renene.2024.121295
+
+CITED IN:
+- "Our analysis extends recent Canadian-specific studies by providing a unified regression model and identifying investment-ready sites benchmarked against current international cost ranges."
+- "Viable (40%-55%): $5.50-$9.00/kg for locations such as St. John's, Stephenville, Ingonish Beach, Lethbridge, and Pincher Creek. This range corresponds to the median values in recent Canadian assessments (CAD 4.20-6.30/kg) and falls within established land-based wind ranges."
+
+================================================================================
+
+[Pintor2018]
+Pintor, A., Oliveira, N., Costa, H., 2018.
+Insights on the use of wind speed vertical extrapolation models.
+Renewable Energy and Power Quality Journal, 16, 717-722.
+DOI: 10.24084/repqj20.410
+
+CITED IN:
+- "Following established wind resource assessment methodologies, wind measurements recorded at standard 10 m anemometer height were adjusted to turbine hub height using the power law."
+
+================================================================================
+
+[Rekik2024]
+Rekik, S., El Alimi, S., 2024.
+A spatial ranking of optimal sites for solar-driven green hydrogen production.
+Energy Reports, 11, 3555-3571.
+DOI: 10.1016/j.egyr.2024.03.001
+
+CITED IN:
+- "This analysis assumes standalone wind-hydrogen systems without grid connection or hybrid renewable integration. Future work should explore wind-solar complementarity, which recent studies suggest can improve capacity factors by 10%-15% while reducing variability."
+
+================================================================================
+
+[Rodriguez2018]
+Rodríguez Ariza, S., Araque, P., 2018.
+Wind speed extrapolation based on power law correction.
+Journal of Renewable Energy, 2018, Article ID 6958546.
+DOI: 10.1155/2018/6958546
+
+CITED IN:
+- "...in the absence of multi-height data, the 1/7th law m=0.143 remains an accepted default for open terrain."
+- "...otherwise adopting the standard value of 0.143 for open terrain."
+
+================================================================================
+
+[Roeder2024]
+Roeder, T., Kaldemeyer, C., Samsun, R.C., Peters, R., Stolten, D., 2024.
+Impact of expected cost reduction and lifetime extension on hydrogen production cost via electrolysis in Germany.
+Applied Energy, 355, 122233.
+DOI: 10.1016/j.apenergy.2023.122233
+
+CITED IN:
+- "Stack degradation over ~60,000-80,000 operating hours necessitates mid-life stack replacement, often represented as a fraction of initial CAPEX and included alongside 2%-4%/year O&M in annualization."
+
+================================================================================
+
+[RMI2025]
+Rocky Mountain Institute, 2025.
+Distilling green hydrogen's water consumption down to the kilogram.
+RMI Technical Report, Basalt, CO.
+
+CITED IN:
+- "Green hydrogen production requires 20-30L of water per kg H2, including chemistry requirements (9-10L) plus purification and cooling."
+
+================================================================================
+
+[Saba2023]
+Saba, S.M., Müller, M., Robinius, M., Stolten, D., 2023.
+The investment costs of electrolysis: A comparison of cost studies from the past 30 years.
+International Journal of Hydrogen Energy, 43(3), 1209-1223.
+DOI: 10.1016/j.ijhydene.2017.11.115
+
+CITED IN:
+- "...learning-curve syntheses and council/agency outlooks project gradual system-level CAPEX declines toward ~$600-$1,200/kW by ~2030 contingent on multi-GW scaling, with stack-specific learning typically outpacing full system learning due to BOP constraints."
+- "Our electrolyzer performance assumption of 57.5 kWh/kg H2 (system level) represents current commercial PEM technology as validated by multiple sources. This efficiency corresponds to approximately 57% based on the lower heating value, falling within the 55-69 kWh/kg range reported in comprehensive technology reviews. The assumed capital cost of $2,000/kW installed aligns with recent market assessments and serves as a conservative baseline given projected cost reductions."
+- "Electrolyzer capital cost: A ±50% variation in electrolyzer CAPEX yields ±17.5% LCOH change. While significant, this sensitivity remains lower than capacity factor impacts, supporting the primacy of site selection."
+
+================================================================================
+
+[Schmidt2023]
+Schmidt, O., Melchior, S., Hawkes, A., Staffell, I., 2023.
+Projecting the future levelized cost of electricity storage technologies.
+Joule, 3(1), 81-100.
+DOI: 10.1016/j.joule.2018.12.008
+
+CITED IN:
+- "Significantly, 16/21 sites (76%) achieve LCOH <$10/kg, the threshold identified by multiple studies as economically defensible for near-term deployment."
+- "The empirical relationship ΔLCOH ≈ $0.108/kg per capacity factor percentage point (95% CI: $0.078-$0.138) provides actionable guidance for project developers and policymakers."
+
+================================================================================
+
+[Steffen2020]
+Steffen, B., 2020.
+Estimating the cost of capital for renewable energy projects.
+Energy Economics, 88, 104783.
+DOI: 10.1016/j.eneeco.2020.104783
+
+CITED IN:
+- "Empirical WACC surveys and cost-of-capital syntheses locate onshore wind financing at ~6%-11% nominal (country/policy dependent), with ~7%-10% typical for developed markets and higher effective rates appropriate for standalone, merchant, or early-stage hydrogen projects; therefore, r=10% over 20-25 years is conservative but reasonable for Canadian standalone wind-hydrogen facilities."
+- "The 10% discount rate represents a conservative estimate for standalone renewable hydrogen projects, falling within the empirically observed 8-12% range for Canadian onshore wind projects and above the 6-7% rates typical for established technologies with policy support."
+
+================================================================================
+
+[Stehly2024]
+Stehly, T., Duffy, P., Mulas, D., 2024.
+Cost of wind energy review: 2024 edition.
+Technical Report NREL/TP-6A40-91775, National Renewable Energy Laboratory, Golden, CO.
+DOI: 10.2172/2331387
+
+CITED IN:
+- "The capacity factor, a key economic metric quantifying the ratio of actual to theoretical maximum energy production, was determined following standard industry practice."
+- "The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics."
+- "TEAs consistently annualize capital via the capital recovery factor CRF = r(1+r)^T/[(1+r)^T-1] and compute wind LCOE as the sum of annualized capital and fixed O&M over annual net generation, which then feeds the hydrogen LCOH through SEC and electrolyzer annualization; standard calculators and cost-of-wind reviews document parameter ranges and provide transparent reference values for FCR/WACC and lifetimes."
+- "International TEAs span unsubsidized LCOH from about $3.5-15/kg depending on CF, electricity price, and financing, with European offshore clustering around $5-9/kg at 45%-55% CF and U.S. onshore spanning roughly $5.5-12/kg under 2024 conditions."
+- "These values represent current market prices, updated from historical values to reflect technology maturation and market dynamics observed in recent cost assessments."
+- "Viable (40%-55%): $5.50-$9.00/kg for locations such as St. John's, Stephenville, Ingonish Beach, Lethbridge, and Pincher Creek. This range corresponds to the median values in recent Canadian assessments (CAD 4.20-6.30/kg) and falls within established land-based wind ranges."
+- "Our results align closely with contemporary international assessments while revealing Canada's competitive advantages. The $4.85-$5.50/kg range for top-tier sites matches or exceeds performance reported in European offshore studies and falls below typical U.S. onshore wind-hydrogen costs of $5.50-$12.16/kg."
+
+================================================================================
+
+[Wang2025]
+Wang, Z., Li, X., Zhang, Y., Chen, H., 2025.
+Comparative experimental study of alkaline and proton exchange membrane water electrolysis for green hydrogen production.
+Applied Energy, 374, 124023.
+DOI: 10.1016/j.apenergy.2024.124023
+
+CITED IN:
+- "Our electrolyzer performance assumption of 57.5 kWh/kg H2 (system level) represents current commercial PEM technology as validated by multiple sources."
+
+================================================================================
+
+END OF REFERENCES

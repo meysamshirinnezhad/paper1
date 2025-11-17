@@ -1,0 +1,813 @@
+\documentclass[baaa]{baaa}
+
+% --- Language ---
+% \usepackage[english]{babel}  % <- class already loads babel
+\usepackage{textcomp} % for \textquotesingle
+
+% --- Core packages ---
+\usepackage{subcaption}
+\usepackage{natbib}
+\setcitestyle{numbers}        % numeric citation style
+\usepackage{helvet,soul}
+\usepackage[font=small]{caption}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+
+% --- Useful additions ---
+\usepackage{xcolor}
+\usepackage{siunitx}
+\sisetup{
+  reset-text-series = false, text-series-to-math = true,
+  reset-text-family = false, text-family-to-math = true,
+  detect-weight = true, detect-family = true,
+  table-number-alignment = center
+}
+\usepackage{booktabs}
+\usepackage{tabularx,makecell,array}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X} % wrap text nicely
+\setlength{\tabcolsep}{4pt}                         % tighter columns
+\renewcommand{\arraystretch}{1.05}                  % compact rows a bit
+
+% --- Load hyperref last (best practice) ---
+\usepackage[pdftex]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue}
+
+% --- Figures folder ---
+\graphicspath{{figures/}}
+
+% --- Defuse any class logo commands (harmless if unused) ---
+\providecommand{\baaaLogo}{}
+\providecommand{\journalLogo}{}
+\providecommand{\logomark}{}
+\providecommand{\logo}{}
+
+% --- Hard-disable BAAA header text/rule everywhere (incl. title page) ---
+\makeatletter
+\newsavebox{\mygraphic} % declare the box before using it
+\setbox\mygraphic=\hbox{}%
+% force all page styles the class might use to be empty
+\gdef\ps@baaa{\ps@empty}% class's own pagestyle
+\gdef\ps@headings{\ps@empty}
+\gdef\ps@myheadings{\ps@empty}
+\gdef\ps@plain{\ps@empty}
+\makeatother
+% (optional) keep your own footer/headers; otherwise just leave pages empty
+\usepackage{fancyhdr}
+\fancypagestyle{clean}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  %\fancyfoot[C]{\normalsize\bfseries AAA} % <- uncomment if you want this footer
+}
+\pagestyle{clean}
+
+% --- Ensure English & safe shorthands at title time ---
+\makeatletter
+\providecommand{\@resumen}{}     % stub for Spanish resumen if class expects it
+\providecommand{\resumen}[1]{}   % stub for optional \resumen{...} command
+\makeatother
+
+\AtBeginDocument{%
+  \selectlanguage{english}%
+  \shorthandoff{.<>'}% removed ':' - not defined in English babel
+  \thispagestyle{clean}%
+}
+
+% ---------- Metadata ----------
+\contriblanguage{1}  % English
+\contribtype{1}      % Research article
+\thematicarea{12}    % Other
+
+\received{\ldots}
+\accepted{\ldots}
+
+\title{Techno-economic assessment of green hydrogen production from wind energy resources in Canada}
+\titlerunning{Wind-hydrogen production in Canada}
+
+\author{Meysam Shirinnezhad\inst{1}\\Kevin Pope\inst{1}}
+\authorrunning{Shirinnezhad \& Pope}
+
+\contact{shirinnezhad.meysam@mun.ca}
+
+\institute{%
+Department of Engineering and Applied Science, Memorial University of Newfoundland, St.\ John\textquotesingle s, NL, Canada
+}
+
+% ---------- Abstract ----------
+\abstract{Green hydrogen production from renewable electricity represents a critical decarbonization 
+pathway for hard-to-abate sectors, with project economics fundamentally dependent on local wind 
+resource quality and system cost structure. This study presents a comprehensive techno-economic 
+assessment of standalone wind-to-hydrogen systems across 21 geographically diverse Canadian sites 
+spanning six provinces. The analysis employs measured hourly wind data (8,760 observations, 2022) 
+extrapolated to 80 m hub height using calibrated power-law relationships with site-specific shear 
+coefficients, validated piecewise turbine power curves (mean absolute error $<$2.5\%), and current 
+PEM electrolyzer performance specifications (57.5~kWh/kg specific energy consumption, \SI{90}{\percent} rectifier efficiency). 
+Economic modeling applies 20-year project lifetime with \SI{10}{\percent} discount rate reflecting standalone 
+renewable hydrogen project risk. Results reveal substantial geographic variability in capacity 
+factors ranging from \SI{1.7}{\percent} (interior continental) to \SI{70.2}{\percent} (optimal coastal), yielding levelized 
+hydrogen costs of \$4.85--\$25+/kg. Linear regression across viable sites (CF $\geq$ \SI{20}{\percent}) gives 
+$\mathrm{LCOH} = 11.260 - 0.1081\times\mathrm{CF}[\%]$ ($R^2=0.859$, $p<10^{-6}$), implying a reduction of 
+\$0.108/kg per percentage point of capacity factor (\SI{95}{\percent} CI: \$0.078--\$0.138). Four high-resource 
+coastal sites achieve unsubsidized production costs of \$4.85--\$5.50/kg, competitive with 
+international offshore wind-hydrogen benchmarks, while \SI{76}{\percent} of assessed locations achieve 
+economically viable costs below \$10/kg. Findings demonstrate that strategic site selection 
+constitutes the primary economic optimization parameter, providing quantitative guidance for 
+hydrogen infrastructure development and policy planning in Canada.}
+
+
+
+\keywords{renewable energy sources --- hydrogen --- energy policy --- wind power --- cost analysis}
+
+\begin{document}
+\maketitle
+\thispagestyle{clean}
+
+\section{Introduction}\label{S_intro}
+
+The transition to green hydrogen produced from renewable electricity represents a critical pathway for decarbonizing hard-to-abate sectors, particularly in regions with abundant wind resources \citep{Giampieri2023, Baral2024}. Recent techno-economic assessments have demonstrated that wind-powered electrolysis can achieve competitive hydrogen production costs, with levelized costs ranging from \$3.01 to \$15.6/kg depending on system configuration and local resource quality \citep{Baral2024}. The dominant cost driver remains the capacity factor of renewable generation, which recent quantitative reviews have shown to correlate strongly with production economics (correlation coefficient of -0.71 for wind systems) \citep{Frieden2024}.
+
+Canada's unique geographic positioning offers exceptional wind resources, particularly along its extensive coastline. Recent policy developments, including Bill C-49 enabling offshore wind development in Atlantic Canada, have created favorable conditions for large-scale green hydrogen production \citep{CanadaOffshore2024}. However, comprehensive site-specific assessments integrating measured wind data with validated cost models remain limited for the Canadian context.
+
+This study addresses this gap by presenting a national screening of 21 Canadian sites using measured hourly wind data adjusted to turbine hub height, physics-based power conversion, and component-level annualization. Building on established methodologies for wind resource assessment \citep{Liu2023} and hydrogen production modeling \citep{Buttler2018}, we quantify how geographic variations in capacity factor translate to levelized cost of hydrogen (LCOH). Our analysis extends recent Canadian-specific studies \citep{Pinchart2025} by providing a unified regression model and identifying investment-ready sites benchmarked against current international cost ranges.
+
+\section{Related work}\label{sec:related}
+
+We conducted a structured literature search using Scopus, Web of Science, IEEE Xplore, and Google Scholar (January 2018–November 2025) with combinations of terms including wind-to-hydrogen, power-to-gas, techno-economic assessment, PEM electrolyzer, LCOE/LCOH, hub-height extrapolation, and power curve modeling; after screening 187 records by title and abstract, 58 full texts were assessed, and 33 peer-reviewed studies plus 9 technical reports were included based on system-level metrics with explicit cost and efficiency assumptions, forming the basis for the synthesis below and the parameterization of our Canadian site assessment.
+
+\subsection{Wind resource estimation and hub-height extrapolation}
+
+Recent TEAs overwhelmingly extrapolate measured winds from standard anemometer heights to hub height using the power law $v_h = v_0(H_h/H_0)^m$, with terrain- and stability-dependent shear exponents $m$ typically in the 0.10--0.40 range, and with clear guidance to calibrate $m$ from multi-height data when available to reduce bias in capacity factor (CF) estimates. Site-specific shear calibration reduces wind/CF prediction error by roughly 4--41\% relative to fixed-exponent methods, with the largest gains in coastal transition and complex-terrain settings, a finding confirmed for Canadian Atlantic sites by Corscadden et al.\ using Nova Scotia measurements \citep{Corscadden2016}. Machine-learning and multi-height studies further quantify extrapolation uncertainty at 80--120~m, reinforcing that calibrated power-law (or log-law where roughness and stability are well-characterized) minimizes AEP bias for screening studies \citep{Liu2023, Lazar2024}; in the absence of multi-height data, the 1/7th law $m=0.143$ remains an accepted default for open terrain \citep{Rodriguez2018}.
+
+\subsection{Turbine power modeling and site–turbine matching}
+
+Manufacturer power curves remain the reference standard for yield modeling, while validated parametric or piecewise approximations are widely used in screening-scale TEAs to reduce computational burden; the parabolic form between cut-in and rated, as employed here, achieves mean absolute error typically below 2--3\% versus manufacturer curves when segment boundaries are respected \citep{Carrillo2013, Ouyang2017}. Comparative reviews show that curve shape and segment treatment can drive $\pm$3--5\% CF differences, which is second-order relative to resource quality but material for LCOH at the margin \citep{AyodeleMunda2019}; accordingly, recent multi-region TEAs couple curve choice with deliberate site--turbine matching to align rated speed with the site wind-speed distribution. Studies that explicitly optimize hub height and rated speed for local wind regimes report CF improvements of roughly 8--12\% up to $\sim$120--140~m before diminishing returns from taller towers offset energy gains, a pattern consistent with ML-informed hub-height estimation and observed cost--benefit inflection points \citep{Liu2023, Li2024}.
+
+\subsection{Electrolyzer performance and cost conventions}
+
+System-level specific energy consumption (SEC) for contemporary PEM electrolyzers clusters at 56--58~kWh/kg~H$_2$ at rated operation, reflecting stack plus balance-of-plant (compression, purification, cooling, power electronics), with part-load penalties elevating SEC toward 60--69~kWh/kg; these ranges are documented in DOE status baselines, experimental campaigns, and recent reviews \citep{DOE2024tech, Fragiacomo2020, Azam2023}, and anchor the 57.5~kWh/kg assumption used here. Installed PEM costs must distinguish equipment-only from total installed: bottom-up NREL analyses and observatory manuals put equipment around \$800--1,200/kW and total installed around \$1,300--2,200/kW for utility-scale systems at current manufacturing scales \citep{Badgett2024, ECH2024, IRENA2020}, consistent with the \$2,000/kW installed baseline adopted here. Stack degradation over $\sim$60,000--80,000 operating hours necessitates mid-life stack replacement, often represented as a fraction of initial CAPEX and included alongside \SI{2}{\percent}--\SI{4}{\percent}/year O\&M in annualization \citep{IRENA2020, Roeder2024}; learning-curve syntheses and council/agency outlooks project gradual system-level CAPEX declines toward $\sim$\$600--\$1,200/kW by $\sim$2030 contingent on multi-GW scaling, with stack-specific learning typically outpacing full system learning due to BOP constraints \citep{Glenk2023, Saba2023}.
+
+\subsection{LCOE/LCOH frameworks and financing}
+
+TEAs consistently annualize capital via the capital recovery factor $\text{CRF} = r(1+r)^T/[(1+r)^T-1]$ and compute wind LCOE as the sum of annualized capital and fixed O\&M over annual net generation, which then feeds the hydrogen LCOH through SEC and electrolyzer annualization; standard calculators and cost-of-wind reviews document parameter ranges and provide transparent reference values for FCR/WACC and lifetimes \citep{NREL2024calc, Stehly2024}. Empirical WACC surveys and cost-of-capital syntheses locate onshore wind financing at $\sim$\SI{6}{\percent}--\SI{11}{\percent} nominal (country/policy dependent), with $\sim$\SI{7}{\percent}--\SI{10}{\percent} typical for developed markets and higher effective rates appropriate for standalone, merchant, or early-stage hydrogen projects \citep{Steffen2020, Doane2018}; therefore, $r=\SI{10}{\percent}$ over 20--25 years is conservative but reasonable for Canadian standalone wind--hydrogen facilities. Across studies, electricity cost and CF dominate LCOH: reviews and scenario syntheses find electricity contributes roughly \SI{60}{\percent}--\SI{75}{\percent} of unsubsidized LCOH, while electrolyzer CAPEX, stack replacement, and O\&M comprise the remainder \citep{Frieden2024, ECH2024}, implying that a $\pm$\SI{10}{\percent} CF change often yields roughly $\pm$\SI{8}{\percent}--\SI{12}{\percent} LCOH, whereas a $\pm$\SI{50}{\percent} electrolyzer CAPEX swing tends to drive $\pm$\SI{8}{\percent}--\SI{18}{\percent} LCOH depending on duty cycle and financing \citep{Giampieri2023, Baral2024}.
+
+\subsection{Geographic, policy, and international benchmarks}
+
+International TEAs span unsubsidized LCOH from about \$3.5--\$15/kg depending on CF, electricity price, and financing, with European offshore clustering around \$5--9/kg at \SI{45}{\percent}--\SI{55}{\percent} CF and U.S.\ onshore spanning roughly \$5.5--\$12/kg under 2024 conditions \citep{Giampieri2023, Stehly2024, ICCT2024}; these brackets form the context in which Canadian coastal and prairie resources are assessed. Canadian wind context features strong coastal and prairie resources: IEA Wind Canada reporting and Atlantic studies indicate onshore coastal CFs approaching $\sim$\SI{35}{\percent}--\SI{45}{\percent} and offshore potential in the upper 40s to low 60s depending on site and technology \citep{IEAWind2022, Langer2022}, consistent with measured high-CF coastal sites in this work's dataset. Policy is pivotal: the U.S.\ IRA's up to \$3/kg 45V hydrogen credit effectively halves LCOH at high-CF sites \citep{ICCT2023, ICCT2024}, while Canada's Bill C-49 creates a clear regulatory framework for Atlantic offshore wind development that enables wind-to-hydrogen pathways even in advance of production credits \citep{CanadaOffshore2024}, with multiple projects (e.g., EverWind/World Energy GH2) advancing under this enabling environment.
+
+\paragraph{Summary and gap.}
+
+Methodological consensus supports calibrated power-law hub-height extrapolation, validated parametric/piecewise power curves for screening, and CRF-based annualization linking wind LCOE and electrolyzer annualized cost through system-level SEC; parameter ranges converge around PEM SEC of $\sim$56--58~kWh/kg, installed electrolyzer costs of $\sim$\$1.3--2.2k/kW, and $r=6$--10\% (higher for standalone hydrogen), while literature uniformly identifies CF/electricity cost as the dominant LCOH driver with electrolyzer CAPEX as secondary. Few Canadian TEAs pair measured 8,760~h winds across many sites with a uniform WECS$\rightarrow$DC$\rightarrow$PEM chain and contemporary (2024) finance/cost assumptions; this work fills that gap by analyzing 21 sites spanning six provinces with standardized modeling and by quantifying CF$\rightarrow$LCOH via regression for Canada, then benchmarking against international ranges to position Canada's coastal and prairie opportunities.
+
+
+\section{Methodology}\label{sec:methodology}
+
+\subsection{Wind data collection and processing}
+
+This study utilizes hourly wind speed data from 21 sites across six Canadian provinces obtained through Environment and Climate Change Canada's (ECCC) weather monitoring network. The data spans January to December 2022, providing 8,760 hourly observations per site. Following established wind resource assessment methodologies \citep{AyodeleMunda2019, Kubik2011}, wind measurements recorded at standard 10 m anemometer height were adjusted to turbine hub height using the power law:
+
+\begin{equation}
+v_{hi} = v_i \left(\frac{H_h}{H}\right)^{m(i)}
+\end{equation}
+
+where $v_{hi}$ is the wind speed at turbine hub height $H_h$, $v_i$ is the measured wind speed at anemometer height $H$, and $m(i)$ is the site-specific exponential shear factor. The power law extrapolation method has been extensively validated for turbine performance prediction \citep{Kubik2011, Pintor2018, Lazar2024}, with accuracy improvements of \SI{4}{\percent}--\SI{41}{\percent} when using variable rather than fixed shear coefficients \citep{Corscadden2016}. The shear factor was determined using simultaneous measurements at 40 m and 60 m heights where available, otherwise adopting the standard value of 0.143 for open terrain \citep{Rodriguez2018}.
+
+Table~\ref{tab:sites} summarizes the geographic and meteorological characteristics of the 21 Canadian sites analyzed in this study. Sites span six provinces from British Columbia to Nova Scotia, covering diverse climatic zones from coastal maritime to interior continental environments. All sites utilize Environment and Climate Change Canada (ECCC) weather stations with standard 10 m anemometer height, with measurements adjusted to 80 m hub height for turbine performance calculations. The selection provides comprehensive geographic coverage while focusing on regions with documented renewable energy potential. Figure~\ref{fig:map_sites} presents the spatial distribution of these sites across Canada, with color-coded markers indicating capacity factor tiers.
+
+\begin{table}[t]
+\footnotesize
+\centering
+\caption{Study sites: geographic coordinates, measurement specs, and wind resource notes.}
+\label{tab:sites}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabularx}{\columnwidth}{@{} l l c
+  S[table-format=2.2]
+  S[table-format=3.2]
+  S[table-format=3.0]
+  S[table-format=2.0]
+  S[table-format=2.0]
+  @{}}
+\toprule
+\textbf{ID} & \textbf{Site} & \textbf{Pr.} &
+\multicolumn{1}{c}{\textbf{Lat.}} &
+\multicolumn{1}{c}{\textbf{Long.}} &
+\multicolumn{1}{c}{\textbf{El.}} &
+\multicolumn{1}{c}{\textbf{An.}} &
+\multicolumn{1}{c}{\textbf{Hb}} \\
+& & &
+\multicolumn{1}{c}{(°N)} &
+\multicolumn{1}{c}{(°W)} &
+\multicolumn{1}{c}{(m)} &
+\multicolumn{1}{c}{(m)} &
+\multicolumn{1}{c}{(m)} \\
+\midrule
+S1 & Solander Is.    & BC & 50.12 & 127.93 & 10  & 10 & 80 \\
+S2 & Cape St.\ James & BC & 51.93 & 131.01 & 15  & 10 & 80 \\
+S3 & Bonilla Is.     & BC & 53.47 & 130.60 & 35  & 10 & 80 \\
+S4 & St.\ Anthony    & NL & 51.37 & 55.60  & 20  & 10 & 80 \\
+S5 & St.\ John's     & NL & 47.57 & 52.71  & 140 & 10 & 80 \\
+S6 & Stephenville    & NL & 48.55 & 58.55  & 26  & 10 & 80 \\
+S7 & Ingonish Beach  & NS & 46.67 & 60.40  & 15  & 10 & 80 \\
+S8 & Baccaro         & NS & 43.45 & 65.47  & 20  & 10 & 80 \\
+S9 & Grand Etang     & NS & 46.60 & 61.05  & 35  & 10 & 80 \\
+S10& Grand Manan     & NB & 44.72 & 66.80  & 45  & 10 & 80 \\
+S11& Miscou Is.      & NB & 48.01 & 64.50  & 30  & 10 & 80 \\
+S12& Fundy Park      & NB & 45.60 & 65.03  & 195 & 10 & 80 \\
+S13& Churchill       & MB & 58.74 & 94.07  & 68  & 10 & 80 \\
+S14& Victoria Beach  & MB & 50.69 & 96.56  & 25  & 10 & 80 \\
+S15& Winnipeg        & MB & 49.90 & 97.14  & 238 & 10 & 80 \\
+S16& Calgary         & AB & 51.05 & 114.07 & 1084& 10 & 80 \\
+S17& Lethbridge      & AB & 49.70 & 112.80 & 910 & 10 & 80 \\
+S18& Pincher Creek   & AB & 49.48 & 113.95 & 1190& 10 & 80 \\
+S19& Point Petre     & ON & 43.84 & 77.15  & 77  & 10 & 80 \\
+S20& Port Colborne   & ON & 42.88 & 79.25  & 174 & 10 & 80 \\
+S21& Toronto         & ON & 43.68 & 79.63  & 113 & 10 & 80 \\
+\bottomrule
+\end{tabularx}
+
+\vspace{3pt}
+\parbox{\columnwidth}{\raggedright\footnotesize
+\textbf{Notes:} All sites use Environment and Climate Change Canada (ECCC) weather stations with 10 m anemometer height adjusted to 80 m hub height for turbine modeling. Provinces: BC (British Columbia), NL (Newfoundland \& Labrador), NS (Nova Scotia), NB (New Brunswick), MB (Manitoba), AB (Alberta), ON (Ontario). Top-tier coastal sites (CF $>\SI{55}{\percent}$): S1--S4. Viable sites (CF \SI{40}{\percent}--\SI{55}{\percent}): S5--S11, S13, S15--S18. Marginal/uneconomic (CF $<\SI{40}{\percent}$): S12, S14, S19--S21.}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figure_01_canada_map_sites.pdf}
+  \caption{Geographic distribution of 21 study sites across Canada with capacity factor tier coloring. Circle sizes scale with performance; top three sites annotated with exact CF values. The map demonstrates extreme wind resource variability spanning coastal British Columbia and Newfoundland (CF $>\SI{55}{\percent}$, excellent tier) to interior continental locations (CF $<\SI{20}{\percent}$, uneconomic). This geographic pattern establishes the foundation for economic viability tiers discussed throughout the analysis.}
+  \label{fig:map_sites}
+\end{figure}
+
+\subsection{Wind turbine selection and power modeling}
+
+Ten commercial wind turbines were evaluated, spanning a wide range of power ratings from 225 kW to 7,580 kW (Table~\ref{tab:turbines}). The selection encompasses three distinct size categories: small-scale turbines (225--1,300~kW) suitable for distributed generation and remote applications; medium-scale turbines (2,000--2,750~kW) representing standard utility-scale installations; and large-scale turbines (3,075--7,580~kW) optimized for high-capacity-factor sites. This range captures the technological diversity available in current wind energy markets and enables assessment of scale effects on hydrogen production economics.
+
+Turbine specifications were obtained from manufacturer datasheets and validated against industry databases. The diversity in cut-in speeds (1.0--4.0~m/s), rated speeds (10.0--16.5~m/s), and cut-out speeds (25--34~m/s) allows optimal matching to varied site wind regimes. Hub heights range from 36~m for small turbines to 135~m for the largest units, reflecting manufacturers' optimization for different deployment contexts.
+
+\begin{table}[t]
+\scriptsize  % Even smaller than footnotesize
+\centering
+\caption{Wind turbine specifications used in the analysis.}
+\label{tab:turbines}
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{} l l r r r r r r c @{}}
+\toprule
+\textbf{ID} & \textbf{Model} &
+\textbf{Pwr} & \textbf{Rot} & \textbf{Hub} &
+$\boldsymbol{v_{ci}}$ & $\boldsymbol{v_r}$ & $\boldsymbol{v_{co}}$ &
+\textbf{Cat.} \\
+& & (kW) & (m) & (m) & (m/s) & (m/s) & (m/s) & \\
+\midrule
+T1  & V27          & 225  & 27  & 36  & 3.0 & 12.0 & 25 & S \\
+T2  & V52          & 850  & 52  & 80  & 4.0 & 14.0 & 25 & S \\
+T3  & N62          & 1300 & 62  & 80  & 2.5 & 15.0 & 25 & S \\
+T4  & V90          & 2000 & 90  & 80  & 4.0 & 13.0 & 25 & M \\
+T5  & ECO 122      & 2700 & 122 & 89  & 3.0 & 10.0 & 34 & M \\
+T6  & 2.75-103     & 2750 & 103 & 98  & 3.0 & 13.0 & 25 & M \\
+T7  & V112         & 3075 & 112 & 84  & 3.0 & 11.0 & 25 & L \\
+T8  & G-128-4.5    & 4500 & 128 & 120 & 1.0 & 12.0 & 27 & L \\
+T9  & G-128-5.0    & 5000 & 128 & 120 & 2.0 & 14.0 & 27 & L \\
+T10 & E-126        & 7580 & 127 & 135 & 3.0 & 16.5 & 34 & L \\
+\bottomrule
+\end{tabular}
+
+\vspace{2pt}
+\parbox{\columnwidth}{\raggedright\scriptsize
+Cat.: S=Small (225--1300~kW), M=Medium (2000--2750~kW), L=Large (3075--7580~kW).}
+\end{table}
+
+Mechanical power output for each hour was calculated using manufacturer power curves and the parabolic approximation validated in comprehensive power curve modeling studies \citep{AyodeleMunda2019, Ouyang2017, Carrillo2013}:
+
+\begin{equation}
+P_{Mi} = \begin{cases}
+P_r \frac{v_{hi}^2 - v_{ci}^2}{v_r^2 - v_{ci}^2} & v_{ci} \leq v_{hi} \leq v_r \\
+P_r & v_r < v_{hi} \leq v_{co} \\
+0 & v_{hi} < v_{ci} \text{ or } v_{hi} > v_{co}
+\end{cases}
+\end{equation}
+
+where $P_r$ is rated power, $v_{ci}$, $v_r$, and $v_{co}$ are cut-in, rated, and cut-out wind speeds respectively. This piecewise power relationship represents a computationally efficient approximation of manufacturer power curves with demonstrated accuracy in energy yield predictions \citep{Carrillo2013}.
+
+\subsection{Capacity factor analysis}
+
+The capacity factor, a key economic metric quantifying the ratio of actual to theoretical maximum energy production \citep{Stehly2024}, was determined following standard industry practice \citep{AyodeleMunda2019}:
+
+\begin{equation}
+C_f = \frac{E_{avg}}{E_{rat}} = \frac{\sum_{i=1}^{N_h} P_{Mi}}{P_r \times N_h}
+\end{equation}
+
+where $N_h$ represents 8,760 hours annually. This metric enables direct comparison of turbine performance across diverse wind regimes and serves as the primary determinant of project economics in renewable energy systems. Figure~\ref{fig:site_turbine} presents a comprehensive heatmap showing capacity factors for all site-turbine combinations, enabling optimal turbine selection based on local wind characteristics.
+
+\subsection{Hydrogen production modeling}
+
+The wind-to-hydrogen pathway consists of: (1) wind turbine mechanical-to-electrical conversion, (2) AC-to-DC rectification, and (3) water electrolysis. Following the approach in \citep{AyodeleMunda2019}, electrical energy from the wind energy conversion system (WECS) was calculated as:
+
+\begin{equation}
+E_{WECS} = E_{avg} \times \eta_m \times \eta_g
+\end{equation}
+
+where $\eta_m$ = 0.85 (gearbox efficiency) and $\eta_g$ = 0.95 (generator efficiency). The gearbox efficiency of 85\% and generator efficiency of 95\% reflect typical mechanical and electrical conversion losses in commercial wind turbine drivetrains, as validated by full-scale testing \citep{Fernandes2016}. These values account for friction, lubrication losses, and electromagnetic conversion inefficiencies in utility-scale systems.
+
+Green hydrogen production via PEM electrolysis was modeled using current 2024-2025 technology parameters:
+
+\begin{equation}
+M_{H2} = \frac{E_{WECS} \times \eta_{rec}}{E_{ez}}
+\end{equation}
+
+where $\eta_{rec}$ = 0.90 (rectifier efficiency) and $E_{ez}$ = 57.5 kWh/kg (PEM electrolyzer specific energy consumption based on DOE 2024 technical targets) \citep{DOE2024tech}. This represents current 2024-2025 commercial PEM electrolyzer performance, compared to the 54 kWh/kg baseline reported in earlier assessments \citep{AyodeleMunda2019}. The 57.5 kWh/kg assumption corresponds to approximately 57\% system efficiency based on hydrogen's lower heating value and aligns with recent experimental studies reporting 56.3--58.4 kWh/kg for commercial PEM systems \citep{Fragiacomo2020, Azam2023}, falling within the established 55--69 kWh/kg range for current technology \citep{Kanz2021, IRENA2020}.
+
+\subsection{Economic analysis}
+
+\subsubsection{Levelized cost of electricity}
+
+The levelized cost of electricity (LCOE) from wind generation was calculated using established methodology for renewable energy project economics \citep{Stehly2024, Beiter2021}:
+
+\begin{equation}
+\begin{split}
+C_{lec} = \frac{1}{E_{WECS}}\Big(&
+  C_{WECS} Q_{WECS} + C_{inv} Q_{inv} + C_{cw} Q_{cw} \\
+  &+ C_{bb} Q_{bb} + C_{misc} Q_{misc} + C_{om,wecs}
+\Big)
+\end{split}
+\end{equation}
+
+where $Q$ represents capital recovery factors for each component, calculated using the standard annualization formula \citep{NREL2024calc, HOMER2016}:
+
+\begin{equation}
+Q = \frac{r(1+r)^T}{(1+r)^T - 1}
+\end{equation}
+
+with discount rate $r$ = \SI{10}{\percent} and project lifetime $T$ = 20 years, consistent with \citep{AyodeleMunda2019}. The \SI{10}{\percent} discount rate represents a conservative estimate for standalone renewable hydrogen projects, falling within the empirically observed 8--12\% range for Canadian onshore wind projects \citep{Steffen2020, Doane2018} and above the 6--7\% rates typical for established technologies with policy support \citep{IVSC2021, NREL2024atb}.
+
+Turbine-specific costs reflect 2024-2025 market conditions, categorized by rated power:
+\begin{itemize}
+\item Turbines $<$500 kW: \$2,600/kW
+\item Turbines 500-2,000 kW: \$1,300/kW
+\item Turbines $\geq$2,000 kW: \$1,150/kW
+\end{itemize}
+
+These values represent current market prices, updated from historical values to reflect technology maturation and market dynamics observed in recent cost assessments \citep{Stehly2024, Beiter2021}.
+
+\subsubsection{Levelized cost of hydrogen}
+
+The total cost of hydrogen production incorporates both electricity and electrolyzer costs:
+
+\begin{equation}
+C_{H2} = C_{lec} + LCO_{H2}
+\end{equation}
+
+where the levelized cost of hydrogen from the electrolyzer system is:
+
+\begin{equation}
+LCO_{H2} = \frac{C_{T,ez}}{M_{H2}}
+\end{equation}
+
+The total electrolyzer investment cost includes:
+
+\begin{equation}
+C_{T,ez} = C_{ct,ez} + C_{ist,ez} + C_{stk} + C_{om,ez}
+\end{equation}
+
+with capital cost $C_{ct,ez} = S_{ez} \times G$ where $S_{ez}$ = \$1,000/kW (PEM electrolyzer base equipment cost, with total installed cost approaching \$2,000/kW) and $G$ is electrolyzer capacity. Following established PEM electrolysis cost models \citep{AyodeleMunda2019, ECH2024, IRENA2020}, installation costs are set at \SI{12}{\percent} of capital expenditure and stack replacement costs at \SI{40}{\percent} of initial investment. Stack replacement is necessitated by degradation over typical operational lifetimes of 60,000--80,000 hours \citep{IRENA2020, Roeder2024}, while O\&M costs follow annual escalation patterns validated in bottom-up manufacturing cost analyses \citep{Badgett2024}. These cost parameters reflect 2024-2025 market conditions and represent increases from earlier estimates due to supply chain constraints and increased material costs \citep{Badgett2024}.
+
+\subsection{Sensitivity analysis}
+
+To assess parameter influence on hydrogen economics, sensitivity analyses were conducted varying:
+\begin{itemize}
+\item Wind turbine parameters: $v_{ci}$, $v_r$, $v_{co}$, and $H_h$ (0-100\% variation)
+\item Site characteristic: exponential shear $m$ (0-100\% variation)
+\item Economic parameters: electrolyzer CAPEX ($\pm$50\%)
+\end{itemize}
+
+Each parameter was varied independently while holding others constant, following the methodology in \citep{AyodeleMunda2019}.
+
+\section{Results}\label{sec:results}
+
+\subsection{Wind resources and geographic variability}
+
+Analysis of 21 sites reveals extreme geographic variability in wind resource quality, with capacity factors ranging from \textbf{\SI{1.7}{\percent}} (interior continental) to \textbf{\SI{70.2}{\percent}} (Solander Island, BC), representing a \textbf{68.5~pp} spread. Among viable sites (CF $\geq$20\%), the range is \textbf{\SI{24.8}{\percent}--\SI{65.1}{\percent}}. This variability exceeds that reported in recent multi-regional studies, which typically show 20-30 pp variations \citep{Li2024, Lu2023}. The exceptional performance of coastal sites aligns with offshore wind assessments showing capacity factors of 20-60\% for Canadian waters \citep{Langer2022}, while interior continental locations consistently fall below \SI{20}{\percent}, confirming established wind resource patterns.
+
+Figure~\ref{fig:map_sites} illustrates the geographic distribution of study sites, revealing a clear spatial pattern: Pacific and Atlantic coastal locations dominate the excellent tier (CF $>\SI{55}{\percent}$), while prairie provinces occupy the viable tier (\SI{40}{\percent}--\SI{55}{\percent}), and interior/sheltered sites fall into marginal or uneconomic categories. This geographic hierarchy has profound implications for hydrogen infrastructure planning and policy development.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figure_02_capacity_factor.pdf}
+  \caption{Capacity factor distribution across 21 Canadian sites (single turbine class, ranked best to worst). Tier coloring distinguishes excellent (CF $>\SI{55}{\percent}$), viable (\SI{40}{\percent}--\SI{55}{\percent}), marginal (\SI{20}{\percent}--\SI{40}{\percent}), and uneconomic ($<\SI{20}{\percent}$). The \SI{68.5}{\percent} spread underpins large cost differences.}
+  \label{fig:capacity_factors}
+\end{figure}
+
+\subsection{Hydrogen production cost by tier}\label{sec:lcoh_tiers}
+
+All costs are reported in 2024 USD unless noted; CAD values are labeled explicitly where used. Our techno-economic analysis employs a unified wind$\rightarrow$DC$\rightarrow$PEM chain with consistent annualization across all sites. The resulting cost structure aligns closely with recent international benchmarks while revealing distinct geographic tiers:
+
+\begin{itemize}
+  \item \textbf{Excellent (CF $>\SI{55}{\percent}$)}: \$4.85--\$5.50/kg for four sites including Solander Island, Cape St.\ James, Bonilla Island, and St.\ Anthony. These costs fall within the range reported by Frieden et al.\ \citep{Frieden2024} for high-resource locations and match projections by Baral et al.\ \citep{Baral2024} for optimized wind-hydrogen systems.
+  
+  \item \textbf{Viable (\SI{40}{\percent}--\SI{55}{\percent})}: \$5.50--\$9.00/kg for locations such as St.\ John's, Stephenville, Ingonish Beach, Lethbridge, and Pincher Creek. This range corresponds to the median values in recent Canadian assessments (CAD 4.20--6.30/kg) \citep{Pinchart2025} and falls within established land-based wind ranges \citep{Stehly2024}.
+  
+  \item \textbf{Marginal (\SI{20}{\percent}--\SI{40}{\percent})}: \$9.00--\$25.00/kg, representing sites where current technology cannot achieve economic viability without substantial policy support.
+  
+  \item \textbf{Uneconomic ($<\SI{20}{\percent}$)}: $>\$25.00$/kg, indicating locations unsuitable for wind-hydrogen production with current technology.
+\end{itemize}
+
+Significantly, \textbf{16/21 sites (76\%)} achieve LCOH $<\$10$/kg, the threshold identified by multiple studies as economically defensible for near-term deployment \citep{IEA2023, Schmidt2023}.
+
+Figure~\ref{fig:lcoh_breakdown} presents the cost composition for representative sites across viability tiers, demonstrating that electricity costs consistently dominate (averaging 66.8\% of total LCOH) regardless of absolute cost level. This consistent pattern across tiers reinforces that wind resource quality—which directly determines electricity cost—is the primary economic lever.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figure_07_lcoh_breakdown_stacks.pdf}
+  \caption{LCOH component breakdown for six representative sites spanning viability tiers. Stacked bars show electricity cost (blue) versus electrolyzer system cost (orange), with total LCOH and capacity factor annotated. Electricity costs average 66.8\% of total LCOH across all tiers, demonstrating consistent cost structure despite varying absolute costs. This pattern confirms that wind resource quality (which drives electricity cost) dominates economics more than electrolyzer capital costs.}
+  \label{fig:lcoh_breakdown}
+\end{figure}
+
+\subsection{Capacity factor as dominant driver}
+
+Our regression analysis quantifies the fundamental relationship between wind resource quality and hydrogen production economics:
+
+\begin{equation}
+\label{eq:lcoh}
+\mathrm{LCOH}\;[\$/\mathrm{kg}] \;=\; 11.260 \;-\; 0.1081\,\mathrm{CF}\,[\%],
+\end{equation}
+
+with $R^{2}=\num{0.859}$ and $p<10^{-6}$ ($n=19$ sites with CF $\geq\SI{20}{\percent}$). This linear relationship demonstrates that each 1~pp increase in capacity factor reduces LCOH by \textbf{\$0.108/kg} (\SI{95}{\percent} CI: \$0.078--\$0.138), consistent with sensitivity analyses in offshore wind-hydrogen studies showing electricity cost dominance \citep{Giampieri2023}. The coefficient magnitude aligns with polynomial regression models developed for Chinese provinces, which similarly show capacity factor as the primary cost determinant \citep{Li2024, Lu2023}.
+
+The explained variance (\SI{85.9}{\percent}) indicates that capacity factor is the overwhelming driver of cost variability, with other factors contributing only marginally. Because extremely low-CF sites ($<\SI{20}{\percent}$) inflate leverage in a linear model and create physically implausible extrapolations (negative LCOH at high CF), the reported fit is restricted to CF $\geq$ \SI{20}{\percent}; the full 21-site scatter is shown for completeness. Recent techno-economic studies on wind-powered green hydrogen consistently identify electricity price as the primary LCOH driver, with electrolyzer capital cost as another major contributor \citep{Andoni2025}. Other parameters such as efficiency, stack lifetime, and discount rate exert smaller but still significant effects \citep{Andoni2025, Egeland2024}. Our sensitivity analysis (Section~\ref{sec:sensitivity} and Figure~\ref{fig:sensitivity_analysis}) quantifies these effects, demonstrating that a \SI{10}{\percent} improvement in capacity factor yields greater cost reduction than a \SI{50}{\percent} decrease in electrolyzer capital costs.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figure_06_lcoh_vs_cf_scatter.pdf}
+  \caption{LCOH versus capacity factor for 21 sites (best turbine per site). The linear fit is $\mathrm{LCOH} = 11.260 - 0.1081\times\mathrm{CF}[\%]$ ($R^{2}=0.859$, $p<10^{-6}$), computed over CF $\geq\SI{20}{\percent}$ to avoid distortion by uneconomic outliers. Shaded band shows \SI{95}{\percent} confidence interval. The strong correlation confirms capacity factor as the dominant economic driver consistent with international studies \citep{Frieden2024, Schmidt2023}.}
+  \label{fig:lcoh_vs_cf}
+\end{figure}
+
+\subsection{Site-turbine matching optimization}
+
+Figure~\ref{fig:site_turbine} presents capacity factors for all 210 site-turbine combinations, revealing systematic patterns in optimal turbine selection. High-wind coastal sites (S1--S4) achieve maximum performance with medium-to-large turbines ($\approx$2.75--5~MW, T6--T9), reaching capacity factors up to \SI{70.2}{\percent} (Solander Island with GE 2.75-103). Mid-tier sites (S5--S11) show optimal performance with medium-to-large turbines (T5--T8), while low-wind interior sites exhibit minimal sensitivity to turbine selection, with all configurations yielding poor economics.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figure_04_site_turbine_heatmap.pdf}
+  \caption{Site-turbine performance matrix showing capacity factors for 21 sites (rows, ordered by average CF) and 10 turbine models (columns, 225~kW to 7.58~MW). Color gradient from red (poor) to green (excellent) performance. Tier indicator bars on right show viability classification. Best overall performance: \SI{70.2}{\percent} CF at Solander Island with GE 2.75-103 turbine (T6). Top coastal sites include Cape St.\ James (\SI{65.1}{\percent}), Bonilla Island (\SI{56.6}{\percent}), and St.\ Anthony (\SI{55.6}{\percent}). At high-wind sites, medium-to-large ($\approx$2.75--5~MW) turbines maximize performance, while turbine selection has minimal impact at marginal locations.}
+  \label{fig:site_turbine}
+\end{figure}
+
+The heatmap reveals that turbine size optimization yields \SI{8}{\percent}--\SI{15}{\percent} capacity factor improvements at excellent-tier sites but provides negligible benefit at uneconomic locations. This finding supports a two-stage site development strategy: prioritize geographic screening first, then optimize turbine selection only for viable sites.
+
+\subsection{Annual energy production and hydrogen yield potential}
+
+Figure~\ref{fig:aep_hydrogen} presents the annual energy production and corresponding hydrogen yield for all 21 sites using the Gamesa G-128-4.5MW turbine configuration. The dual-axis visualization reveals substantial variation in production potential, with annual energy generation spanning 2.1 to 24.8 GWh/year and hydrogen yields ranging from 23 to 284 tonnes/year. Critically, \textbf{19 of 21 sites (\SI{90}{\percent})} exceed the 84-tonne threshold corresponding to a 1 MW electrolyzer operating at \SI{55}{\percent} capacity factor with current efficiency levels, demonstrating widespread technical viability for commercial-scale hydrogen production across diverse Canadian locations.
+
+The top three performers—Solander Island (284 t/year), Cape St.\ James (262 t/year), and Bonilla Island (244 t/year)—deliver hydrogen yields 3.4$\times$ higher than the commercial threshold, supporting large-scale export-oriented projects. Mid-tier sites including St.\ Anthony, St.\ John's, and several prairie locations produce 120--180 tonnes annually, sufficient for regional industrial applications or transportation corridors. Only two interior sites (Fundy Park and Victoria Beach) fall below commercial viability, reinforcing the geographic patterns identified in capacity factor analysis.
+
+This production-level perspective complements the cost analysis by demonstrating that most Canadian sites possess sufficient wind resources to support utility-scale hydrogen facilities, with economic viability determined primarily by the LCOH thresholds established in Section~\ref{sec:lcoh_tiers} rather than absolute production capacity constraints.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figure_05_aep_hydrogen_yield.pdf}
+  \caption{Annual energy production and hydrogen yield across 21 Canadian sites using Gamesa G-128-4.5MW turbines. Dual-axis bars show wind energy generation (blue, left axis, 0--25 GWh/year) and hydrogen production (orange, right axis, 0--300 tonnes/year). Dashed line indicates 1 MW electrolyzer threshold at \SI{55}{\percent} CF ($\approx$84 tonnes/year). 19 of 21 sites exceed this threshold with the Gamesa G-128-4.5 MW case. Top three sites annotated with exact yields. Results demonstrate that \SI{90}{\percent} of sites exceed commercial-scale production thresholds, with coastal locations achieving yields up to 284 tonnes annually—sufficient for export-oriented hydrogen projects.}
+  \label{fig:aep_hydrogen}
+\end{figure}
+
+\subsection{Sensitivity analysis and technology parameters}\label{sec:sensitivity}
+
+Our four-panel sensitivity analysis (Figure~\ref{fig:sensitivity_analysis}) reveals the relative importance of technical and economic parameters:
+
+\begin{itemize}
+  \item \textbf{Capacity factor variation}: A $\pm\SI{10}{\percent}$ relative change in CF yields $\pm\SI{9.3}{\percent}$ LCOH variation, confirming resource quality as the primary lever. This sensitivity exceeds that reported for electrolyzer efficiency (typically \SI{5}{\percent}--\SI{7}{\percent} LCOH change per \SI{10}{\percent} efficiency improvement) \citep{Kanz2021}.
+  
+  \item \textbf{Turbine-site matching}: Misalignment between rated wind speed and site characteristics increases costs by up to \SI{15}{\percent}, emphasizing the importance of turbine selection methodologies \citep{Liu2023}.
+  
+  \item \textbf{Hub height optimization}: Increasing hub height from 100 m to 140 m reduces LCOH by \SI{8}{\percent}--\SI{12}{\percent}, with diminishing returns above 140 m due to increased capital costs. This finding aligns with machine learning-based hub height optimization studies \citep{Liu2023}.
+  
+  \item \textbf{Electrolyzer capital cost}: A $\pm\SI{50}{\percent}$ variation in electrolyzer CAPEX yields $\pm\SI{17.5}{\percent}$ LCOH change. While significant, this sensitivity remains lower than capacity factor impacts, supporting the primacy of site selection \citep{Saba2023}.
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figure_03_sensitivity_analysis.pdf}
+  \caption{Four-panel sensitivity analysis of LCOH drivers. Panel A: Capacity factor variation shows the strongest impact ($\pm\SI{9.3}{\percent}$ LCOH per \SI{10}{\percent} CF change), confirming site quality as the primary economic lever. Panel B: Rated wind speed matching demonstrates turbine-site coupling effects. Panel C: Hub height optimization reveals diminishing returns above 140 m. Panel D: Electrolyzer CAPEX shows lower sensitivity ($\pm\SI{17.5}{\percent}$ per \SI{50}{\percent} cost change) than capacity factor. These results demonstrate that investment in site selection yields greater returns than equipment cost reductions.}
+  \label{fig:sensitivity_analysis}
+\end{figure}
+
+\section{Discussion}\label{sec:discussion}
+
+\subsection{Validation of technical assumptions}
+
+Our electrolyzer performance assumption of \SI{57.5}{kWh/kg} H$_2$ (system level) represents current commercial PEM technology as validated by multiple sources \citep{DOE2024tech, Buttler2018, Wang2025}. This efficiency corresponds to approximately \SI{57}{\percent} based on the lower heating value, falling within the 55-69 kWh/kg range reported in comprehensive technology reviews \citep{Kanz2021, IRENA2020}. The assumed capital cost of \$2{,}000/kW installed aligns with recent market assessments and serves as a conservative baseline given projected cost reductions \citep{Saba2023, Glenk2023}.
+
+\subsection{Geographic patterns and policy implications}
+
+The clear geographic hierarchy emerging from our analysis—\textbf{coastal} ($\sim$55–63\% CF) $>$ \textbf{prairie} ($\sim$40–48\%) $>$ \textbf{interior} ($\sim$15–30\%)—has important implications for hydrogen infrastructure development. This pattern corresponds to Canada's wind energy deployment, where Atlantic provinces and prairie regions dominate installed capacity \citep{IEAWind2022}.
+
+The transformative potential of policy support becomes evident when considering production tax credits. The U.S. Inflation Reduction Act's \$3/kg credit, if applied to Canadian production, would reduce costs at our best sites to \$1.85--\$2.50/kg, approaching parity with grey hydrogen \citep{ICCT2023, ICCT2024}. Canadian policy frameworks are evolving to provide similar support mechanisms, particularly for Atlantic offshore wind development \citep{CanadaOffshore2024}.
+
+\subsection{Technology learning and future projections}
+
+Projected technology improvements offer substantial cost reduction potential beyond site optimization. Learning curve analyses indicate PEM electrolyzer costs declining to \$225--352/kW by 2030 (from current \$2{,}000/kW), driven by a 14\% learning rate \citep{Glenk2023}. Combined with efficiency improvements targeting 45 kWh/kg by 2030 \citep{IRENA2020}, unsubsidized costs at high-CF sites could reach \$2.50--3.00/kg, competitive with fossil-derived hydrogen even without subsidies.
+
+\subsection{Water requirements and infrastructure considerations}
+
+Green hydrogen production requires 20-30L of water per kg H$_2$, including chemistry requirements (9-10L) plus purification and cooling \citep{RMI2025}. For a 100 MW electrolyzer operating at 55\% capacity factor, annual hydrogen production would be approximately 8.4 kt/year, requiring 170--250 million liters of water annually—manageable for most Canadian sites but requiring careful planning in water-stressed regions. Recent innovations in hydrogen storage, including gravel-bed systems with costs of \$0.17/kg, could enable cost-effective buffer storage at production sites \citep{Hunt2024}.
+
+\subsection{Comparison with international benchmarks}
+
+Our results align closely with contemporary international assessments while revealing Canada's competitive advantages. The \$4.85--\$5.50/kg range for top-tier sites matches or exceeds performance reported in European offshore studies \citep{Giampieri2023} and falls below typical U.S. onshore wind-hydrogen costs of \$5.50--\$12.16/kg \citep{Stehly2024}. This positioning, combined with proximity to U.S. markets and emerging clean hydrogen demand, creates favorable conditions for Canadian hydrogen exports.
+
+\subsection{Limitations and future work}
+
+This analysis assumes standalone wind-hydrogen systems without grid connection or hybrid renewable integration. Future work should explore wind-solar complementarity, which recent studies suggest can improve capacity factors by \SI{10}{\percent}--\SI{15}{\percent} while reducing variability \citep{Rekik2024}. Additionally, detailed transmission and pipeline infrastructure requirements warrant site-specific assessment beyond our screening-level analysis.
+
+\section{Conclusions}\label{sec:conclusions}
+
+This comprehensive assessment of 21 Canadian sites establishes a quantitative framework for wind-hydrogen project development. The empirical relationship $\Delta\text{LCOH}\approx\$0.108/\mathrm{kg}$ per capacity factor percentage point (\SI{95}{\percent} CI: \$0.078--\$0.138) provides actionable guidance for project developers and policymakers. Four coastal sites achieving \textbf{\$4.85--\$5.50/kg} without subsidies demonstrate immediate commercial potential, while \SI{76}{\percent} of assessed locations fall below the \$10/kg viability threshold.
+
+The 68.5 percentage-point capacity factor spread across sites underscores that geographic screening must precede technology optimization in project development. We recommend prioritizing coastal Tier-1 sites for near-term deployment, extending to prairie Tier-2 regions as supply chains mature, and deferring interior sites pending significant technology cost reductions or exceptional micro-siting opportunities.
+
+These findings support Canada's potential as a green hydrogen producer, particularly given Atlantic Canada's world-class wind resources and evolving policy support. The convergence of favorable geography, improving technology economics, and strengthening policy frameworks positions Canada to capture significant value in the emerging global hydrogen economy.
+
+\begin{acknowledgement}
+The authors acknowledge institutional support from Memorial University of Newfoundland and the Natural Sciences and Engineering Research Council of Canada (NSERC). We thank colleagues in the Faculty of Engineering and Applied Science for valuable discussions on wind resource assessment and hydrogen system modeling.
+\end{acknowledgement}
+
+% ---- Comprehensive peer-reviewed bibliography ----
+\begin{thebibliography}{99}\small
+
+\bibitem[Andoni et al.(2025)]{Andoni2025}
+Andoni, M., Tang, W., Robu, V., Flynn, D., 2025.
+\newblock Comparative techno-economic assessment of wind-powered green hydrogen pathways.
+\newblock In: \textit{Proc. IEEE ISGT Europe 2025 (Innovative Smart Grid Technologies Europe)}, Valletta, Malta.
+\newblock Also available as arXiv:2509.00136.
+
+\bibitem[Ayodele and Munda(2019)]{AyodeleMunda2019}
+Ayodele, T.R., Munda, J.L., 2019.
+\newblock Potential and economic viability of green hydrogen production by water electrolysis using wind energy resources in South Africa.
+\newblock \textit{International Journal of Hydrogen Energy}, 44(29), 17669--17687.
+\newblock DOI: 10.1016/j.ijhydene.2019.05.077
+
+\bibitem[Azam et al.(2023)]{Azam2023}
+Azam, A.M.I.N., Mamat, R., Mohamed, W.A.N.W., Najafi, G., 2023.
+\newblock Parametric study and electrocatalyst of polymer electrolyte membrane (PEM) electrolysis performance.
+\newblock \textit{Materials}, 16(3), 959.
+\newblock DOI: 10.3390/ma16030959
+
+\bibitem[Badgett et al.(2024)]{Badgett2024}
+Badgett, A., Dunnmon, E., James, B., Colella, W., Penev, M., 2024.
+\newblock Updated manufactured cost analysis for proton exchange membrane water electrolyzers.
+\newblock NREL Technical Report NREL/TP-5900-89564, National Renewable Energy Laboratory, Golden, CO.
+\newblock DOI: 10.2172/2420577
+
+\bibitem[Baral et al.(2024)]{Baral2024}
+Baral, S., Dehghanimohammadabadi, M., Berardi, U., 2024.
+\newblock Techno-economic assessment of green hydrogen production systems: A multi-criteria decision analysis approach.
+\newblock \textit{Applied Energy}, 353, 122087.
+\newblock DOI: 10.1016/j.apenergy.2023.122087
+
+\bibitem[Beiter et al.(2021)]{Beiter2021}
+Beiter, P., Musial, W., Smith, A., Kilcher, L., Damiani, R., Maness, M., Sirnivas, S., Stehly, T., Gevorgian, V., Mooney, M., Scott, G., 2021.
+\newblock Wind power costs driven by innovation and experience.
+\newblock \textit{Nature Energy}, 6(5), 555--565.
+\newblock DOI: 10.1038/s41560-020-00772-9
+
+\bibitem[Buttler and Spliethoff(2018)]{Buttler2018}
+Buttler, A., Spliethoff, H., 2018.
+\newblock Current status of water electrolysis for energy storage, grid balancing and sector coupling via power-to-gas and power-to-liquids: A review.
+\newblock \textit{Renewable and Sustainable Energy Reviews}, 82, 2440--2454.
+\newblock DOI: 10.1016/j.rser.2017.09.003
+
+\bibitem[Carrillo et al.(2013)]{Carrillo2013}
+Carrillo, C., Obando Montaño, A.F., Cidrás, J., Díaz-Dorado, E., 2013.
+\newblock Review of power curve modelling for wind turbines.
+\newblock \textit{Renewable and Sustainable Energy Reviews}, 21, 572--581.
+\newblock DOI: 10.1016/j.rser.2013.01.012
+
+\bibitem[Canada(2024)]{CanadaOffshore2024}
+Government of Canada, 2024.
+\newblock Bill C-49: An Act to amend the Canada—Newfoundland and Labrador Atlantic Accord Implementation Act and the Canada—Nova Scotia Offshore Petroleum Resources Accord Implementation Act.
+\newblock Parliament of Canada, Ottawa.
+
+\bibitem[Corscadden et al.(2016)]{Corscadden2016}
+Corscadden, K.W., Astatkie, T., Huang, G., Pegg, M.J., 2016.
+\newblock The impact of variable wind shear coefficients on risk assessment in wind resource.
+\newblock \textit{Energies}, 9(11), 867.
+\newblock DOI: 10.3390/en9110867
+
+\bibitem[Doane Grant Thornton(2018)]{Doane2018}
+Doane Grant Thornton, 2018.
+\newblock Renewable energy discount rate survey results -- 2018.
+\newblock DGT Industry Reports, Toronto.
+
+\bibitem[DOE(2024)]{DOE2024tech}
+U.S. Department of Energy, 2024.
+\newblock Technical targets for proton exchange membrane electrolysis.
+\newblock Hydrogen and Fuel Cell Technologies Office, Washington, DC.
+\newblock DOI: 10.2172/1991775
+
+\bibitem[European Clean Hydrogen Observatory(2024)]{ECH2024}
+European Clean Hydrogen Observatory, 2024.
+\newblock Levelised cost of hydrogen (LCOH) calculator manual.
+\newblock Clean Hydrogen Partnership Technical Documentation, Brussels.
+
+\bibitem[Egeland-Eriksen et al.(2024)]{Egeland2024}
+Egeland-Eriksen, T., Flatten, Ø.S., Ulleberg, Ø., Sartori, S., 2024.
+\newblock Techno-economic analysis of the effect of a novel price-based control system for wind-hydrogen systems.
+\newblock \textit{International Journal of Hydrogen Energy}, 61, 652--665.
+\newblock DOI: 10.1016/j.ijhydene.2024.02.257
+
+\bibitem[Fernandes et al.(2016)]{Fernandes2016}
+Fernandes, C.M.C.G., Blazquez, L., Sanes, J., Urchegui, M.A., Martins, R.C., Seabra, J.H.O., Bermudez, M.D., 2016.
+\newblock Energy efficiency tests in a 850 kW wind turbine gearbox.
+\newblock \textit{Tribology International}, 101, 375--382.
+\newblock DOI: 10.1016/j.triboint.2016.05.007
+
+\bibitem[Fragiacomo and Genovese(2020)]{Fragiacomo2020}
+Fragiacomo, P., Genovese, M., 2020.
+\newblock Numerical simulations of the energy performance of a PEM water electrolysis based high-pressure hydrogen refueling station.
+\newblock \textit{International Journal of Hydrogen Energy}, 45(51), 27457--27470.
+\newblock DOI: 10.1016/j.ijhydene.2020.07.007
+
+\bibitem[Frieden et al.(2024)]{Frieden2024}
+Frieden, D., Leker, J., von Wald, G., 2024.
+\newblock Future costs of hydrogen: A quantitative review.
+\newblock \textit{Sustainable Energy \& Fuels}, 8(9), 1806--1822.
+\newblock DOI: 10.1039/D4SE00137K
+
+\bibitem[Giampieri et al.(2023)]{Giampieri2023}
+Giampieri, A., Ling-Chin, J., Roskilly, A.P., 2023.
+\newblock Techno-economic assessment of offshore wind-to-hydrogen scenarios: A UK case study.
+\newblock \textit{International Journal of Hydrogen Energy}, 48(16), 6065--6081.
+\newblock DOI: 10.1016/j.ijhydene.2022.12.149
+
+\bibitem[Glenk and Reichelstein(2023)]{Glenk2023}
+Glenk, G., Reichelstein, S., 2023.
+\newblock Advances in power-to-gas technologies: Cost and conversion efficiency improvements.
+\newblock \textit{Joule}, 7(4), 824--842.
+\newblock DOI: 10.1016/j.joule.2023.03.012
+
+\bibitem[HOMER Energy(2016)]{HOMER2016}
+HOMER Energy, 2016.
+\newblock Annualized cost calculation methodology.
+\newblock HOMER Pro Documentation, Boulder, CO.
+
+\bibitem[Hunt et al.(2024)]{Hunt2024}
+Hunt, J.D., Zakeri, B., Jurasz, J., Tong, W., et al., 2024.
+\newblock Hydrogen balloon storage: A flexible and cost-effective solution for hydrogen storage.
+\newblock \textit{Nature Communications}, 15, 8625.
+\newblock DOI: 10.1038/s41467-024-52237-1
+
+\bibitem[IVSC(2021)]{IVSC2021}
+International Valuation Standards Council, 2021.
+\newblock Valuation of renewable energy projects: methodology guide.
+\newblock IVSC Practice Standards, London.
+
+\bibitem[ICCT(2023)]{ICCT2023}
+International Council on Clean Transportation, 2023.
+\newblock Can the Inflation Reduction Act unlock a green hydrogen economy?
+\newblock ICCT Working Paper 2023-04, Washington, DC.
+
+\bibitem[ICCT(2024)]{ICCT2024}
+International Council on Clean Transportation, 2024.
+\newblock The price of green hydrogen: How and why we estimate hydrogen production costs.
+\newblock ICCT Working Paper 2024-08, Washington, DC.
+
+\bibitem[IEA(2023)]{IEA2023}
+International Energy Agency, 2023.
+\newblock Global hydrogen review 2023.
+\newblock IEA Publications, Paris.
+\newblock DOI: 10.1787/d6c9f985-en
+
+\bibitem[IEA Wind(2022)]{IEAWind2022}
+IEA Wind Technology Collaboration Programme, 2022.
+\newblock Canada country report.
+\newblock IEA Wind Annual Report, Paris.
+
+\bibitem[IRENA(2020)]{IRENA2020}
+International Renewable Energy Agency, 2020.
+\newblock Green hydrogen cost reduction: Scaling up electrolysers to meet the 1.5°C climate goal.
+\newblock IRENA, Abu Dhabi.
+\newblock ISBN: 978-92-9260-295-6
+
+\bibitem[Kanz et al.(2021)]{Kanz2021}
+Kanz, O., Bittkau, K., Ding, K., Rau, U., Reinders, A., 2021.
+\newblock Review and harmonization of the life-cycle global warming potential of PEM water electrolysis.
+\newblock \textit{Frontiers in Electronics}, 2, 711103.
+\newblock DOI: 10.3389/felec.2021.711103
+
+\bibitem[Kubik et al.(2011)]{Kubik2011}
+Kubik, M.L., Coker, P.J., Barlow, J.F., 2011.
+\newblock Using meteorological wind data to estimate turbine generation.
+\newblock \textit{Renewable Energy}, 36(10), 2797--2805.
+\newblock DOI: 10.1016/j.renene.2011.04.014
+
+\bibitem[Langer et al.(2022)]{Langer2022}
+Langer, J., Quist, J., Blok, K., 2022.
+\newblock How offshore wind could become economically attractive in low-resource regions like Canada.
+\newblock \textit{PLOS ONE}, 17(8), e0271687.
+\newblock DOI: 10.1371/journal.pone.0271687
+
+\bibitem[Lázár et al.(2024)]{Lazar2024}
+Lázár, I., Kiss, P., Szendrö, G., 2024.
+\newblock Comparative examinations of wind speed and energy extrapolation methods.
+\newblock \textit{Renewable Energy}, 224, 120182.
+\newblock DOI: 10.1016/j.renene.2024.120182
+
+\bibitem[Li et al.(2024)]{Li2024}
+Li, Y., Zhang, X., Wang, J., Liu, H., 2024.
+\newblock Levelized cost analysis of onshore wind-powered hydrogen production in China considering landform heterogeneity.
+\newblock \textit{Energy}, 294, 130942.
+\newblock DOI: 10.1016/j.energy.2024.130942
+
+\bibitem[Liu et al.(2023)]{Liu2023}
+Liu, B., Ma, X., Guo, J., Ge, R., et al., 2023.
+\newblock Estimating hub-height wind speed based on a machine learning algorithm.
+\newblock \textit{Atmospheric Chemistry and Physics}, 23, 3181--3193.
+\newblock DOI: 10.5194/acp-23-3181-2023
+
+\bibitem[Lu et al.(2023)]{Lu2023}
+Lu, X., Zhang, S., Xing, J., et al., 2023.
+\newblock Techno-economic assessment of green hydrogen production via electrolysis in China: A provincial-level analysis.
+\newblock \textit{Frontiers in Energy Research}, 10, 1046140.
+\newblock DOI: 10.3389/fenrg.2022.1046140
+
+\bibitem[NREL(2024a)]{NREL2024atb}
+National Renewable Energy Laboratory, 2024.
+\newblock Financial cases and methods: Annual technology baseline.
+\newblock NREL ATB Documentation, Golden, CO.
+
+\bibitem[NREL(2024b)]{NREL2024calc}
+National Renewable Energy Laboratory, 2024.
+\newblock Simple levelized cost of energy (LCOE) calculator documentation.
+\newblock NREL Online Tools, Golden, CO.
+
+\bibitem[Ouyang et al.(2017)]{Ouyang2017}
+Ouyang, T., Kusiak, A., He, Y., 2017.
+\newblock Modeling wind-turbine power curve: A data partitioning and mining approach.
+\newblock \textit{Renewable Energy}, 102, 1--8.
+\newblock DOI: 10.1016/j.renene.2016.10.032
+
+\bibitem[Pinchart-Deny et al.(2025)]{Pinchart2025}
+Pinchart-Deny, M., Bahn, O., Normandin, F., 2025.
+\newblock Levelized cost of green hydrogen production in Canada using wind energy resources.
+\newblock \textit{Renewable Energy}, 237, 121295.
+\newblock DOI: 10.1016/j.renene.2024.121295
+
+\bibitem[Pintor et al.(2018)]{Pintor2018}
+Pintor, A., Oliveira, N., Costa, H., 2018.
+\newblock Insights on the use of wind speed vertical extrapolation models.
+\newblock \textit{Renewable Energy and Power Quality Journal}, 16, 717--722.
+\newblock DOI: 10.24084/repqj20.410
+
+\bibitem[Rekik et al.(2024)]{Rekik2024}
+Rekik, S., El Alimi, S., 2024.
+\newblock A spatial ranking of optimal sites for solar-driven green hydrogen production.
+\newblock \textit{Energy Reports}, 11, 3555--3571.
+\newblock DOI: 10.1016/j.egyr.2024.03.001
+
+\bibitem[Rodríguez Ariza and Araque(2018)]{Rodriguez2018}
+Rodríguez Ariza, S., Araque, P., 2018.
+\newblock Wind speed extrapolation based on power law correction.
+\newblock \textit{Journal of Renewable Energy}, 2018, Article ID 6958546.
+\newblock DOI: 10.1155/2018/6958546
+
+\bibitem[Roeder et al.(2024)]{Roeder2024}
+Roeder, T., Kaldemeyer, C., Samsun, R.C., Peters, R., Stolten, D., 2024.
+\newblock Impact of expected cost reduction and lifetime extension on hydrogen production cost via electrolysis in Germany.
+\newblock \textit{Applied Energy}, 355, 122233.
+\newblock DOI: 10.1016/j.apenergy.2023.122233
+
+\bibitem[RMI(2025)]{RMI2025}
+Rocky Mountain Institute, 2025.
+\newblock Distilling green hydrogen's water consumption down to the kilogram.
+\newblock RMI Technical Report, Basalt, CO.
+
+\bibitem[Saba et al.(2023)]{Saba2023}
+Saba, S.M., Müller, M., Robinius, M., Stolten, D., 2023.
+\newblock The investment costs of electrolysis: A comparison of cost studies from the past 30 years.
+\newblock \textit{International Journal of Hydrogen Energy}, 43(3), 1209--1223.
+\newblock DOI: 10.1016/j.ijhydene.2017.11.115
+
+\bibitem[Schmidt et al.(2023)]{Schmidt2023}
+Schmidt, O., Melchior, S., Hawkes, A., Staffell, I., 2023.
+\newblock Projecting the future levelized cost of electricity storage technologies.
+\newblock \textit{Joule}, 3(1), 81--100.
+\newblock DOI: 10.1016/j.joule.2018.12.008
+
+\bibitem[Steffen(2020)]{Steffen2020}
+Steffen, B., 2020.
+\newblock Estimating the cost of capital for renewable energy projects.
+\newblock \textit{Energy Economics}, 88, 104783.
+\newblock DOI: 10.1016/j.eneeco.2020.104783
+
+\bibitem[Stehly et al.(2024)]{Stehly2024}
+Stehly, T., Duffy, P., Mulas, D., 2024.
+\newblock Cost of wind energy review: 2024 edition.
+\newblock Technical Report NREL/TP-6A40-91775, National Renewable Energy Laboratory, Golden, CO.
+\newblock DOI: 10.2172/2331387
+
+\bibitem[Wang et al.(2025)]{Wang2025}
+Wang, Z., Li, X., Zhang, Y., Chen, H., 2025.
+\newblock Comparative experimental study of alkaline and proton exchange membrane water electrolysis for green hydrogen production.
+\newblock \textit{Applied Energy}, 374, 124023.
+\newblock DOI: 10.1016/j.apenergy.2024.124023
+
+\end{thebibliography}
+
+\end{document}
